@@ -1,0 +1,232 @@
+<!--
+  Rekordmixxx — a Mixxx skin inspired by the PERFORMANCE mode of rekordbox 7.
+  Author: Rekordmixxx contributors
+  License: CC BY-SA 4.0
+  Requires Mixxx 2.4 or newer.  All artwork is original vector art made for this skin.
+  "rekordbox" is a trademark of AlphaTheta Corporation; this skin is unaffiliated.
+-->
+<!DOCTYPE skin>
+<skin>
+  <manifest>
+    <title>Rekordmixxx</title>
+    <author>Rekordmixxx contributors</author>
+    <version>1.0.0</version>
+    <description>A Mixxx skin modelled on the rekordbox 7 PERFORMANCE mode: global bar, effect panel, stacked waveforms, player panels with pads and jog, centre mixer, sampler deck and browser.</description>
+    <language>en</language>
+    <license>CC BY-SA 4.0</license>
+    <attributes>
+      <attribute config_key="[App],num_decks">4</attribute>
+      <attribute config_key="[App],num_samplers">16</attribute>
+      <attribute persist="true" config_key="[Skin],show_waveforms">1</attribute>
+      <attribute persist="true" config_key="[Skin],show_4decks">0</attribute>
+      <attribute persist="true" config_key="[Skin],show_mixer">1</attribute>
+      <attribute persist="true" config_key="[Rekordmixxx],show_fx">0</attribute>
+      <attribute persist="true" config_key="[Skin],show_samplers">1</attribute>
+      <attribute persist="true" config_key="[Skin],show_microphones">1</attribute>
+      <attribute persist="true" config_key="[Skin],show_coverart">1</attribute>
+      <attribute persist="true" config_key="[Skin],show_library_coverart">1</attribute>
+      <attribute config_key="[Skin],show_maximized_library">0</attribute>
+    </attributes>
+  </manifest>
+
+  <Schemes>
+    <Scheme>
+      <Name>Dark</Name>
+      <Style src="skin:scheme_dark.qss"/>
+      <SetVariable name="Accent">#0e76f1</SetVariable>
+      <SetVariable name="WaveBg">#000000</SetVariable>
+      <SetVariable name="OverviewBg">#000000</SetVariable>
+      <SetVariable name="SignalColor">#1b3f8f</SetVariable>
+      <SetVariable name="WaveLow">#1b64ff</SetVariable>
+      <SetVariable name="WaveMid">#ffa51c</SetVariable>
+      <SetVariable name="WaveHigh">#ffffff</SetVariable>
+      <SetVariable name="PlayPosColor">#ff2a2a</SetVariable>
+      <SetVariable name="BeatColor">#7a7a7a</SetVariable>
+      <SetVariable name="AxesColor">#2a2a2a</SetVariable>
+      <SetVariable name="CueColor">#ffa51c</SetVariable>
+      <SetVariable name="LoopColor">#2ecc55</SetVariable>
+      <SetVariable name="IntroOutroColor">#8c6cff</SetVariable>
+      <SetVariable name="PlayedOverlayColor">#8c000000</SetVariable>
+      <SetVariable name="EndOfTrackColor">#ff3d3d</SetVariable>
+      <SetVariable name="KnobArcColor">#0e76f1</SetVariable>
+      <SetVariable name="FaderBarColor">#0e76f1</SetVariable>
+    </Scheme>
+    <Scheme>
+      <Name>Amber</Name>
+      <Style src="skin:scheme_amber.qss"/>
+      <SetVariable name="Accent">#f59a1b</SetVariable>
+      <SetVariable name="WaveBg">#000000</SetVariable>
+      <SetVariable name="OverviewBg">#000000</SetVariable>
+      <SetVariable name="SignalColor">#8a5510</SetVariable>
+      <SetVariable name="WaveLow">#f58a0f</SetVariable>
+      <SetVariable name="WaveMid">#ffd24a</SetVariable>
+      <SetVariable name="WaveHigh">#ffffff</SetVariable>
+      <SetVariable name="PlayPosColor">#ff2a2a</SetVariable>
+      <SetVariable name="BeatColor">#7a7a7a</SetVariable>
+      <SetVariable name="AxesColor">#2a2a2a</SetVariable>
+      <SetVariable name="CueColor">#0e76f1</SetVariable>
+      <SetVariable name="LoopColor">#2ecc55</SetVariable>
+      <SetVariable name="IntroOutroColor">#8c6cff</SetVariable>
+      <SetVariable name="PlayedOverlayColor">#8c000000</SetVariable>
+      <SetVariable name="EndOfTrackColor">#ff3d3d</SetVariable>
+      <SetVariable name="KnobArcColor">#f59a1b</SetVariable>
+      <SetVariable name="FaderBarColor">#f59a1b</SetVariable>
+    </Scheme>
+  </Schemes>
+
+  <ObjectName>Mixxx</ObjectName>
+  <!-- Base style + Mixxx's own native-looking menu styles (shipped since 2.4) -->
+  <Style src="skin:style.qss"
+         src-linux="skins:default-menu-styles-linux.qss"
+         src-windows="skins:default-menu-styles-windows.qss"/>
+  <!-- Keep this the FIRST <MinimumSize> in skin.xml, literal numbers only:
+       Mixxx reads it to decide whether the skin fits the screen. -->
+  <MinimumSize>1180,620</MinimumSize>
+  <SizePolicy>me,me</SizePolicy>
+  <Layout>vertical</Layout>
+  <Children>
+
+    <!-- Global variables go first, before any template is loaded -->
+    <SetVariable name="KnobMinAngle">-135</SetVariable>
+    <SetVariable name="KnobMaxAngle">135</SetVariable>
+
+    <!-- Singletons: instantiated once, displayed wherever a SingletonContainer asks -->
+    <SingletonDefinition>
+      <ObjectName>LibrarySingleton</ObjectName>
+      <Children>
+        <Template src="skin:templates/library.xml"/>
+      </Children>
+    </SingletonDefinition>
+
+    <WidgetGroup>
+      <ObjectName>SkinContainer</ObjectName>
+      <Layout>vertical</Layout>
+      <SizePolicy>me,me</SizePolicy>
+      <Children>
+
+        <Template src="skin:templates/toolbar.xml"/>
+        <Template src="skin:templates/fx_panel.xml"/>
+
+        <WidgetStack currentpage="[Skin],show_maximized_library">
+          <ObjectName>MainStack</ObjectName>
+          <SizePolicy>me,me</SizePolicy>
+          <Children>
+
+            <!-- Page 0: performance view -->
+            <Splitter>
+              <ObjectName>MainSplitter</ObjectName>
+              <Orientation>vertical</Orientation>
+              <SizePolicy>me,me</SizePolicy>
+              <SplitSizes>670,360</SplitSizes>
+              <SplitSizesConfigKey>[Rekordmixxx],main_split</SplitSizesConfigKey>
+              <Collapsible>0,0</Collapsible>
+              <Children>
+
+                <WidgetGroup>
+                  <ObjectName>PerformanceArea</ObjectName>
+                  <Layout>vertical</Layout>
+                  <SizePolicy>me,me</SizePolicy>
+                  <Children>
+
+                    <WidgetGroup>
+                      <ObjectName>WaveformsContainer</ObjectName>
+                      <Layout>vertical</Layout>
+                      <SizePolicy>me,me</SizePolicy>
+                      <Children>
+                        <Template src="skin:templates/waveforms.xml"/>
+                      </Children>
+                      <Connection>
+                        <ConfigKey persist="true">[Skin],show_waveforms</ConfigKey>
+                        <BindProperty>visible</BindProperty>
+                      </Connection>
+                    </WidgetGroup>
+
+                    <WidgetGroup>
+                      <ObjectName>DecksMixerRow</ObjectName>
+                      <Layout>horizontal</Layout>
+                      <SizePolicy>me,f</SizePolicy>
+                      <Children>
+                        <WidgetGroup>
+                          <ObjectName>DeckColumn</ObjectName>
+                          <Layout>vertical</Layout>
+                          <SizePolicy>me,f</SizePolicy>
+                          <Children>
+                            <Template src="skin:templates/deck_left.xml">
+                              <SetVariable name="ChanNum">1</SetVariable>
+                            </Template>
+                            <WidgetGroup>
+                              <ObjectName>DeckColumn</ObjectName>
+                              <Layout>vertical</Layout>
+                              <SizePolicy>me,f</SizePolicy>
+                              <Children>
+                                <Template src="skin:templates/deck_left.xml">
+                                  <SetVariable name="ChanNum">3</SetVariable>
+                                </Template>
+                              </Children>
+                              <Connection>
+                                <ConfigKey persist="true">[Skin],show_4decks</ConfigKey>
+                                <BindProperty>visible</BindProperty>
+                              </Connection>
+                            </WidgetGroup>
+                          </Children>
+                        </WidgetGroup>
+
+                        <Template src="skin:templates/mixer.xml"/>
+
+                        <WidgetGroup>
+                          <ObjectName>DeckColumn</ObjectName>
+                          <Layout>vertical</Layout>
+                          <SizePolicy>me,f</SizePolicy>
+                          <Children>
+                            <Template src="skin:templates/deck_right.xml">
+                              <SetVariable name="ChanNum">2</SetVariable>
+                            </Template>
+                            <WidgetGroup>
+                              <ObjectName>DeckColumn</ObjectName>
+                              <Layout>vertical</Layout>
+                              <SizePolicy>me,f</SizePolicy>
+                              <Children>
+                                <Template src="skin:templates/deck_right.xml">
+                                  <SetVariable name="ChanNum">4</SetVariable>
+                                </Template>
+                              </Children>
+                              <Connection>
+                                <ConfigKey persist="true">[Skin],show_4decks</ConfigKey>
+                                <BindProperty>visible</BindProperty>
+                              </Connection>
+                            </WidgetGroup>
+                          </Children>
+                        </WidgetGroup>
+                      </Children>
+                    </WidgetGroup>
+
+                    <Template src="skin:templates/bottom_row.xml"/>
+                    <Template src="skin:templates/sampler_deck.xml"/>
+
+                  </Children>
+                </WidgetGroup>
+
+                <SingletonContainer>
+                  <ObjectName>LibrarySingleton</ObjectName>
+                </SingletonContainer>
+
+              </Children>
+            </Splitter>
+
+            <!-- Page 1: maximized library -->
+            <WidgetGroup trigger="[Skin],show_maximized_library" on_hide_select="0">
+              <Layout>vertical</Layout>
+              <SizePolicy>me,me</SizePolicy>
+              <Children>
+                <SingletonContainer>
+                  <ObjectName>LibrarySingleton</ObjectName>
+                </SingletonContainer>
+              </Children>
+            </WidgetGroup>
+
+          </Children>
+        </WidgetStack>
+      </Children>
+    </WidgetGroup>
+  </Children>
+</skin>

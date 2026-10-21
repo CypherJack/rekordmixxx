@@ -1,0 +1,82 @@
+<!-- Beat-loop block: loop size, halve/double, AU (auto beat loop) and MA (re-loop). Variables: ChanNum -->
+<Template>
+  <SetVariable name="Group">[Channel<Variable name="ChanNum"/>]</SetVariable>
+  <WidgetGroup>
+    <ObjectName>LoopBlock</ObjectName>
+    <Layout>vertical</Layout>
+    <SizePolicy>f,f</SizePolicy>
+    <MinimumSize>60,-1</MinimumSize>
+    <MaximumSize>60,-1</MaximumSize>
+    <Children>
+      <BeatSpinBox>
+        <ObjectName>LoopSize</ObjectName>
+        <TooltipId>beatloop_size</TooltipId>
+        <Size>60f,32f</Size>
+        <Value><Variable name="Group"/>,beatloop_size</Value>
+      </BeatSpinBox>
+      <WidgetGroup>
+        <ObjectName>LoopRow</ObjectName>
+        <Layout>horizontal</Layout>
+        <SizePolicy>f,f</SizePolicy>
+        <Children>
+          <Template src="skin:templates/controls/button.xml">
+            <SetVariable name="ObjectName">LoopHalveButton</SetVariable>
+            <SetVariable name="TooltipId">loop_halve</SetVariable>
+            <SetVariable name="Size">29f,30f</SetVariable>
+            <SetVariable name="Text">&#x2039;</SetVariable>
+            <SetVariable name="LeftPush">true</SetVariable>
+            <SetVariable name="ConfigKey"><Variable name="Group"/>,loop_halve</SetVariable>
+          </Template>
+          <Template src="skin:templates/controls/button.xml">
+            <SetVariable name="ObjectName">LoopDoubleButton</SetVariable>
+            <SetVariable name="TooltipId">loop_double</SetVariable>
+            <SetVariable name="Size">29f,30f</SetVariable>
+            <SetVariable name="Text">&#x203A;</SetVariable>
+            <SetVariable name="LeftPush">true</SetVariable>
+            <SetVariable name="ConfigKey"><Variable name="Group"/>,loop_double</SetVariable>
+          </Template>
+        </Children>
+      </WidgetGroup>
+      <WidgetGroup>
+        <ObjectName>LoopRow</ObjectName>
+        <Layout>horizontal</Layout>
+        <SizePolicy>f,f</SizePolicy>
+        <Children>
+          <PushButton>
+            <ObjectName>AutoLoopButton</ObjectName>
+            <TooltipId>beatloop_activate</TooltipId>
+            <Size>29f,24f</Size>
+            <NumberStates>2</NumberStates>
+            <LeftClickIsPushButton>true</LeftClickIsPushButton>
+            <State><Number>0</Number><Text>AU</Text></State>
+            <State><Number>1</Number><Text>AU</Text></State>
+            <Connection>
+              <ConfigKey><Variable name="Group"/>,beatloop_activate</ConfigKey>
+              <ButtonState>LeftButton</ButtonState>
+              <ConnectValueToWidget>false</ConnectValueToWidget>
+            </Connection>
+            <Connection>
+              <ConfigKey><Variable name="Group"/>,loop_enabled</ConfigKey>
+              <ConnectValueFromWidget>false</ConnectValueFromWidget>
+            </Connection>
+          </PushButton>
+          <PushButton>
+            <ObjectName>ManualLoopButton</ObjectName>
+            <TooltipId>reloop_toggle</TooltipId>
+            <Size>29f,24f</Size>
+            <NumberStates>2</NumberStates>
+            <LeftClickIsPushButton>true</LeftClickIsPushButton>
+            <State><Number>0</Number><Text>MA</Text></State>
+            <State><Number>1</Number><Text>MA</Text></State>
+            <Connection>
+              <ConfigKey><Variable name="Group"/>,reloop_toggle</ConfigKey>
+              <ButtonState>LeftButton</ButtonState>
+              <EmitOnPressAndRelease>true</EmitOnPressAndRelease>
+              <ConnectValueToWidget>false</ConnectValueToWidget>
+            </Connection>
+          </PushButton>
+        </Children>
+      </WidgetGroup>
+    </Children>
+  </WidgetGroup>
+</Template>

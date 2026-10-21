@@ -1,0 +1,29 @@
+<!--
+  Left-hand player panel (decks 1 and 3): pads and loop block on the outside,
+  CUE/PLAY, jog and SLIP/Q/MT towards the mixer.  Variables: ChanNum
+-->
+<Template>
+  <WidgetGroup>
+    <ObjectName>Deck</ObjectName>
+    <Layout>vertical</Layout>
+    <SizePolicy>me,f</SizePolicy>
+    <Children>
+      <Template src="skin:templates/deck_header.xml"/>
+      <Template src="skin:templates/deck_overview.xml"/>
+      <WidgetGroup>
+        <ObjectName>DeckControls</ObjectName>
+        <Layout>horizontal</Layout>
+        <SizePolicy>me,f</SizePolicy>
+        <Children>
+          <Template src="skin:templates/pads.xml"/>
+          <Template src="skin:templates/loop_block.xml"/>
+          <Template src="skin:templates/transport.xml"/>
+          <Template src="skin:templates/jog.xml"/>
+          <Template src="skin:templates/slip_block.xml"/>
+          <Template src="skin:templates/rate_slider.xml"/>
+        </Children>
+      </WidgetGroup>
+      <Template src="skin:templates/deck_footer.xml"/>
+    </Children>
+  </WidgetGroup>
+</Template>

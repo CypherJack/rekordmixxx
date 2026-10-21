@@ -1,0 +1,29 @@
+/* Amber scheme — CDJ-style orange accent (#f59a1b). Appended after style.qss. */
+
+WPushButton#PanelFx[displayValue="1"], WPushButton#PanelWaves[displayValue="1"],
+WPushButton#PanelSamplers[displayValue="1"], WPushButton#PanelMixer[displayValue="1"],
+WPushButton#PanelMic[displayValue="1"], WPushButton#PanelDecks[displayValue="1"],
+WPushButton#PanelLibrary[displayValue="1"],
+WPushButton#FxAssignButton[displayValue="1"], WPushButton#FxEnableButton[displayValue="1"],
+WPushButton#KeySyncButton[displayValue="1"], WPushButton#BeatSyncButton[displayValue="1"],
+WPushButton#AutoLoopButton[displayValue="1"], WPushButton#ManualLoopButton[displayValue="1"],
+WPushButton#SlipButton[displayValue="1"], WPushButton#QuantizeButton[displayValue="1"],
+WPushButton#MasterTempoButton[displayValue="1"], WPushButton#ReverseButton[displayValue="1"],
+WPushButton#PflButton[displayValue="1"], WPushButton#TalkoverButton[displayValue="1"],
+WPushButton#PadButton[displayValue="1"], WPushButton#PadButton[pressed="true"],
+WPushButton#FooterButton[pressed="true"] {
+  background-color: #f59a1b;
+  border-color: #f59a1b;
+  color: #000000;
+}
+WPushButton#MasterButton { border-color: #f59a1b; color: #f59a1b; }
+WPushButton#MasterButton:hover { border-color: #ffb84d; }
+WPushButton#MasterButton[displayValue="1"] { background-color: #f59a1b; color: #000000; }
+
+WLibrarySidebar::item:selected { background-color: #4a3410; }
+WTrackTableView, WLibrarySidebar { selection-background-color: #5a3d0c; }
+WSearchLineEdit:focus, WBeatSpinBox:focus { border-color: #f59a1b; }
+
+#LibraryFeatureControls QPushButton:checked { background-color: #f59a1b; color: #000000; }
+#LibraryFeatureControls QRadioButton::indicator:checked { background-color: #f59a1b; border: 2px solid #1e1e1e; border-radius: 7px; }
+#LibraryFeatureControls QRadioButton::indicator:unchecked { background-color: #000000; border: 1px solid #555555; border-radius: 7px; }

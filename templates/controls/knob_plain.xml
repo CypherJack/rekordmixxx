@@ -1,0 +1,31 @@
+<!--
+  Mixer-style knob: dark cap + white indicator, no value arc (as in rekordbox's
+  TRIM / HIGH / MID / LOW). Variables: ObjectName, TooltipId, ConfigKey
+-->
+<Template>
+  <WidgetGroup>
+    <ObjectName>KnobBox</ObjectName>
+    <Layout>vertical</Layout>
+    <SizePolicy>f,f</SizePolicy>
+    <Children>
+      <KnobComposed>
+        <ObjectName><Variable name="ObjectName"/></ObjectName>
+        <TooltipId><Variable name="TooltipId"/></TooltipId>
+        <Size>28f,28f</Size>
+        <BackPath scalemode="STRETCH_ASPECT">skin:images/knob_bg.svg</BackPath>
+        <Knob scalemode="STRETCH_ASPECT">skin:images/knob_indicator.svg</Knob>
+        <MinAngle><Variable name="KnobMinAngle"/></MinAngle>
+        <MaxAngle><Variable name="KnobMaxAngle"/></MaxAngle>
+        <ArcRadius>12</ArcRadius>
+        <ArcThickness>1</ArcThickness>
+        <ArcBgThickness>1</ArcBgThickness>
+        <ArcColor>#00000000</ArcColor>
+        <ArcBgColor>#00000000</ArcBgColor>
+        <ArcUnipolar>false</ArcUnipolar>
+        <Connection>
+          <ConfigKey><Variable name="ConfigKey"/></ConfigKey>
+        </Connection>
+      </KnobComposed>
+    </Children>
+  </WidgetGroup>
+</Template>

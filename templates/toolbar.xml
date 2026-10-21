@@ -1,0 +1,85 @@
+<!--
+  Global bar (rekordbox "Global section"): mode name, panel toggles (blue when on),
+  master level meters and clock.
+-->
+<Template>
+  <WidgetGroup>
+    <ObjectName>GlobalBar</ObjectName>
+    <Layout>horizontal</Layout>
+    <SizePolicy>me,f</SizePolicy>
+    <MinimumSize>-1,30</MinimumSize>
+    <MaximumSize>-1,30</MaximumSize>
+    <Children>
+      <Label>
+        <ObjectName>ModeName</ObjectName>
+        <Text>PERFORMANCE</Text>
+        <Size>100f,22f</Size>
+      </Label>
+      <WidgetGroup><Size>8f,1min</Size></WidgetGroup>
+
+      <Template src="skin:templates/controls/panel_toggle.xml">
+        <SetVariable name="ObjectName">PanelFx</SetVariable>
+        <SetVariable name="TooltipId">show_effects</SetVariable>
+        <SetVariable name="ConfigKey">[Rekordmixxx],show_fx</SetVariable>
+      </Template>
+      <Template src="skin:templates/controls/panel_toggle.xml">
+        <SetVariable name="ObjectName">PanelWaves</SetVariable>
+        <SetVariable name="TooltipId">show_waveforms</SetVariable>
+        <SetVariable name="ConfigKey">[Skin],show_waveforms</SetVariable>
+      </Template>
+      <Template src="skin:templates/controls/panel_toggle.xml">
+        <SetVariable name="ObjectName">PanelSamplers</SetVariable>
+        <SetVariable name="TooltipId">show_samplers</SetVariable>
+        <SetVariable name="ConfigKey">[Skin],show_samplers</SetVariable>
+      </Template>
+      <Template src="skin:templates/controls/panel_toggle.xml">
+        <SetVariable name="ObjectName">PanelMixer</SetVariable>
+        <SetVariable name="TooltipId">show_mixer</SetVariable>
+        <SetVariable name="ConfigKey">[Skin],show_mixer</SetVariable>
+      </Template>
+      <Template src="skin:templates/controls/panel_toggle.xml">
+        <SetVariable name="ObjectName">PanelMic</SetVariable>
+        <SetVariable name="TooltipId">show_microphone</SetVariable>
+        <SetVariable name="ConfigKey">[Skin],show_microphones</SetVariable>
+      </Template>
+      <WidgetGroup><Size>8f,1min</Size></WidgetGroup>
+      <Template src="skin:templates/controls/panel_toggle.xml">
+        <SetVariable name="ObjectName">PanelDecks</SetVariable>
+        <SetVariable name="TooltipId">toggle_4decks</SetVariable>
+        <SetVariable name="ConfigKey">[Skin],show_4decks</SetVariable>
+      </Template>
+      <Template src="skin:templates/controls/panel_toggle.xml">
+        <SetVariable name="ObjectName">PanelLibrary</SetVariable>
+        <SetVariable name="TooltipId">maximize_library</SetVariable>
+        <SetVariable name="ConfigKey">[Skin],show_maximized_library</SetVariable>
+      </Template>
+
+      <WidgetGroup><Size>1me,1min</Size></WidgetGroup>
+
+      <WidgetGroup>
+        <ObjectName>GlobalMeters</ObjectName>
+        <Layout>vertical</Layout>
+        <SizePolicy>f,f</SizePolicy>
+        <Children>
+          <Template src="skin:templates/controls/vumeter_h.xml">
+            <SetVariable name="Group">[Main]</SetVariable>
+            <SetVariable name="Suffix">_left</SetVariable>
+            <SetVariable name="TooltipId">main_VuMeterL</SetVariable>
+          </Template>
+          <Template src="skin:templates/controls/vumeter_h.xml">
+            <SetVariable name="Group">[Main]</SetVariable>
+            <SetVariable name="Suffix">_right</SetVariable>
+            <SetVariable name="TooltipId">main_VuMeterR</SetVariable>
+          </Template>
+        </Children>
+      </WidgetGroup>
+      <WidgetGroup><Size>14f,1min</Size></WidgetGroup>
+      <Time>
+        <ObjectName>Clock</ObjectName>
+        <TooltipId>time</TooltipId>
+        <CustomFormat>hh:mm</CustomFormat>
+        <Size>44f,22f</Size>
+      </Time>
+    </Children>
+  </WidgetGroup>
+</Template>

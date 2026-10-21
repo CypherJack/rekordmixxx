@@ -1,0 +1,48 @@
+<!--
+  One effect slot, rekordbox style: name selector on top; power button + knob below.
+  Variables: FxUnit, FxNum
+-->
+<Template>
+  <SetVariable name="SlotGroup">[EffectRack1_EffectUnit<Variable name="FxUnit"/>_Effect<Variable name="FxNum"/>]</SetVariable>
+  <WidgetGroup>
+    <ObjectName>FxSlot</ObjectName>
+    <Layout>vertical</Layout>
+    <SizePolicy>me,f</SizePolicy>
+    <Children>
+      <EffectSelector>
+        <ObjectName>FxSelector</ObjectName>
+        <TooltipId>EffectSlot_effect_selector</TooltipId>
+        <EffectRack>1</EffectRack>
+        <EffectUnit><Variable name="FxUnit"/></EffectUnit>
+        <Effect><Variable name="FxNum"/></Effect>
+        <!-- 'i': a combobox's size hint is its longest item and would force a wide minimum -->
+        <SizePolicy>i,f</SizePolicy>
+        <MinimumSize>50,22</MinimumSize>
+        <MaximumSize>-1,22</MaximumSize>
+      </EffectSelector>
+      <WidgetGroup>
+        <ObjectName>FxSlotRow</ObjectName>
+        <Layout>horizontal</Layout>
+        <SizePolicy>me,f</SizePolicy>
+        <Children>
+          <Template src="skin:templates/controls/button.xml">
+            <SetVariable name="ObjectName">FxEnableButton</SetVariable>
+            <SetVariable name="TooltipId">EffectSlot_enabled</SetVariable>
+            <SetVariable name="Size">34f,20f</SetVariable>
+            <SetVariable name="Text">ON</SetVariable>
+            <SetVariable name="LeftPush">false</SetVariable>
+            <SetVariable name="ConfigKey"><Variable name="SlotGroup"/>,enabled</SetVariable>
+          </Template>
+          <WidgetGroup><Size>1me,1min</Size></WidgetGroup>
+          <Template src="skin:templates/controls/knob.xml">
+            <SetVariable name="ObjectName">FxMetaKnob</SetVariable>
+            <SetVariable name="TooltipId">EffectSlot_metaknob</SetVariable>
+            <SetVariable name="ArcUnipolar">true</SetVariable>
+            <SetVariable name="ConfigKey"><Variable name="SlotGroup"/>,meta</SetVariable>
+          </Template>
+          <WidgetGroup><Size>1me,1min</Size></WidgetGroup>
+        </Children>
+      </WidgetGroup>
+    </Children>
+  </WidgetGroup>
+</Template>

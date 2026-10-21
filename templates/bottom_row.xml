@@ -1,0 +1,127 @@
+<!--
+  Microphone / headphone / recording row (rekordbox "Microphone panel", "Headphone panel",
+  "Recording panel"): talk-over, headphone mix + level, crossfader, main level, record.
+-->
+<Template>
+  <WidgetGroup>
+    <ObjectName>BottomRow</ObjectName>
+    <Layout>horizontal</Layout>
+    <SizePolicy>me,f</SizePolicy>
+    <MinimumSize>-1,36</MinimumSize>
+    <MaximumSize>-1,36</MaximumSize>
+    <Children>
+
+      <WidgetGroup>
+        <ObjectName>MicBlock</ObjectName>
+        <Layout>horizontal</Layout>
+        <SizePolicy>min,f</SizePolicy>
+        <Children>
+          <Label><ObjectName>MicIcon</ObjectName><Size>22f,22f</Size></Label>
+          <Template src="skin:templates/controls/button.xml">
+            <SetVariable name="ObjectName">TalkoverButton</SetVariable>
+            <SetVariable name="TooltipId">microphone_talkover</SetVariable>
+            <SetVariable name="Size">70f,22f</SetVariable>
+            <SetVariable name="Text">TALK OVER</SetVariable>
+            <SetVariable name="LeftPush">false</SetVariable>
+            <SetVariable name="ConfigKey">[Microphone],talkover</SetVariable>
+          </Template>
+          <Label><ObjectName>FooterLabel</ObjectName><Text>GAIN</Text><Size>30f,-1</Size></Label>
+          <Template src="skin:templates/controls/knob.xml">
+            <SetVariable name="ObjectName">MicGainKnob</SetVariable>
+            <SetVariable name="TooltipId">microphone_pregain</SetVariable>
+            <SetVariable name="ArcUnipolar">false</SetVariable>
+            <SetVariable name="ConfigKey">[Microphone],pregain</SetVariable>
+          </Template>
+        </Children>
+        <Connection>
+          <ConfigKey persist="true">[Skin],show_microphones</ConfigKey>
+          <BindProperty>visible</BindProperty>
+        </Connection>
+      </WidgetGroup>
+
+      <WidgetGroup><Size>1me,1min</Size></WidgetGroup>
+
+      <WidgetGroup>
+        <ObjectName>MixBlock</ObjectName>
+        <Layout>horizontal</Layout>
+        <SizePolicy>min,f</SizePolicy>
+        <Children>
+          <Label><ObjectName>HeadphoneIcon</ObjectName><Size>22f,22f</Size></Label>
+          <Label><ObjectName>FooterLabel</ObjectName><Text>MIX</Text><Size>24f,-1</Size></Label>
+          <Template src="skin:templates/controls/knob.xml">
+            <SetVariable name="ObjectName">HeadMixKnob</SetVariable>
+            <SetVariable name="TooltipId">headMix</SetVariable>
+            <SetVariable name="ArcUnipolar">false</SetVariable>
+            <SetVariable name="ConfigKey">[Master],headMix</SetVariable>
+          </Template>
+          <Label><ObjectName>FooterLabel</ObjectName><Text>LEVEL</Text><Size>36f,-1</Size></Label>
+          <Template src="skin:templates/controls/knob.xml">
+            <SetVariable name="ObjectName">HeadGainKnob</SetVariable>
+            <SetVariable name="TooltipId">headphone_gain</SetVariable>
+            <SetVariable name="ArcUnipolar">true</SetVariable>
+            <SetVariable name="ConfigKey">[Master],headGain</SetVariable>
+          </Template>
+          <WidgetGroup><Size>18f,1min</Size></WidgetGroup>
+          <Template src="skin:templates/controls/fader.xml">
+            <SetVariable name="ObjectName">Crossfader</SetVariable>
+            <SetVariable name="TooltipId">crossfader</SetVariable>
+            <SetVariable name="Size">150f,22f</SetVariable>
+            <SetVariable name="BarAxisPos">11</SetVariable>
+            <SetVariable name="Horizontal">true</SetVariable>
+            <SetVariable name="Unipolar">false</SetVariable>
+            <SetVariable name="Track">fader_track_h.svg</SetVariable>
+            <SetVariable name="Handle">fader_handle_h.svg</SetVariable>
+            <SetVariable name="ConfigKey">[Master],crossfader</SetVariable>
+          </Template>
+          <WidgetGroup><Size>18f,1min</Size></WidgetGroup>
+          <Label><ObjectName>FooterLabel</ObjectName><Text>MAIN</Text><Size>30f,-1</Size></Label>
+          <Template src="skin:templates/controls/knob.xml">
+            <SetVariable name="ObjectName">MainGainKnob</SetVariable>
+            <SetVariable name="TooltipId">main_gain</SetVariable>
+            <SetVariable name="ArcUnipolar">true</SetVariable>
+            <SetVariable name="ConfigKey">[Master],gain</SetVariable>
+          </Template>
+        </Children>
+        <Connection>
+          <ConfigKey persist="true">[Skin],show_mixer</ConfigKey>
+          <BindProperty>visible</BindProperty>
+        </Connection>
+      </WidgetGroup>
+
+      <WidgetGroup><Size>1me,1min</Size></WidgetGroup>
+
+      <WidgetGroup>
+        <ObjectName>RecBlock</ObjectName>
+        <Layout>horizontal</Layout>
+        <SizePolicy>min,f</SizePolicy>
+        <Children>
+          <PushButton>
+            <ObjectName>RecButton</ObjectName>
+            <TooltipId>toggle_recording</TooltipId>
+            <Size>30f,22f</Size>
+            <NumberStates>3</NumberStates>
+            <State><Number>0</Number></State>
+            <State><Number>1</Number></State>
+            <State><Number>2</Number></State>
+            <Connection>
+              <ConfigKey>[Recording],toggle_recording</ConfigKey>
+              <ButtonState>LeftButton</ButtonState>
+              <EmitOnPressAndRelease>true</EmitOnPressAndRelease>
+              <ConnectValueToWidget>false</ConnectValueToWidget>
+            </Connection>
+            <Connection>
+              <ConfigKey>[Recording],status</ConfigKey>
+              <ConnectValueFromWidget>false</ConnectValueFromWidget>
+            </Connection>
+          </PushButton>
+          <RecordingDuration>
+            <ObjectName>RecDuration</ObjectName>
+            <TooltipId>recording_duration</TooltipId>
+            <InactiveText>00:00:00</InactiveText>
+            <Size>72f,22f</Size>
+          </RecordingDuration>
+        </Children>
+      </WidgetGroup>
+    </Children>
+  </WidgetGroup>
+</Template>

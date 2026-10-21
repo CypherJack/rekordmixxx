@@ -1,0 +1,182 @@
+<!--
+  Performance pads: 8 pads in two columns of four, plus a mode button that cycles
+  HOT CUE -> BEAT LOOP -> BEAT JUMP -> LOOP ROLL (right click goes back).
+  The stack cycles through its pages with the [Rekordmixxx],padmode_next/prev_<deck> controls.
+  Variables: ChanNum
+-->
+<Template>
+  <SetVariable name="Group">[Channel<Variable name="ChanNum"/>]</SetVariable>
+  <WidgetStack>
+    <NextControl>[Rekordmixxx],padmode_next_<Variable name="ChanNum"/></NextControl>
+    <PrevControl>[Rekordmixxx],padmode_prev_<Variable name="ChanNum"/></PrevControl>
+    <ObjectName>PadStack</ObjectName>
+    <SizePolicy>me,me</SizePolicy>
+    <Children>
+
+      <!-- Page 1: HOT CUE -->
+      <WidgetGroup>
+        <ObjectName>PadPage</ObjectName>
+        <Layout>vertical</Layout>
+        <SizePolicy>me,me</SizePolicy>
+        <Children>
+          <WidgetGroup>
+            <ObjectName>PadGrid</ObjectName>
+            <Layout>horizontal</Layout>
+            <SizePolicy>me,me</SizePolicy>
+            <Children>
+              <WidgetGroup>
+                <ObjectName>PadColumn</ObjectName>
+                <Layout>vertical</Layout>
+                <SizePolicy>me,me</SizePolicy>
+                <Children>
+                  <Template src="skin:templates/hotcue.xml"><SetVariable name="Num">1</SetVariable><SetVariable name="Letter">A</SetVariable></Template>
+                  <Template src="skin:templates/hotcue.xml"><SetVariable name="Num">2</SetVariable><SetVariable name="Letter">B</SetVariable></Template>
+                  <Template src="skin:templates/hotcue.xml"><SetVariable name="Num">3</SetVariable><SetVariable name="Letter">C</SetVariable></Template>
+                  <Template src="skin:templates/hotcue.xml"><SetVariable name="Num">4</SetVariable><SetVariable name="Letter">D</SetVariable></Template>
+                </Children>
+              </WidgetGroup>
+              <WidgetGroup>
+                <ObjectName>PadColumn</ObjectName>
+                <Layout>vertical</Layout>
+                <SizePolicy>me,me</SizePolicy>
+                <Children>
+                  <Template src="skin:templates/hotcue.xml"><SetVariable name="Num">5</SetVariable><SetVariable name="Letter">E</SetVariable></Template>
+                  <Template src="skin:templates/hotcue.xml"><SetVariable name="Num">6</SetVariable><SetVariable name="Letter">F</SetVariable></Template>
+                  <Template src="skin:templates/hotcue.xml"><SetVariable name="Num">7</SetVariable><SetVariable name="Letter">G</SetVariable></Template>
+                  <Template src="skin:templates/hotcue.xml"><SetVariable name="Num">8</SetVariable><SetVariable name="Letter">H</SetVariable></Template>
+                </Children>
+              </WidgetGroup>
+            </Children>
+          </WidgetGroup>
+          <Template src="skin:templates/pad_mode.xml">
+            <SetVariable name="Mode">HOT CUE</SetVariable>
+          </Template>
+        </Children>
+      </WidgetGroup>
+
+      <!-- Page 2: BEAT LOOP -->
+      <WidgetGroup>
+        <ObjectName>PadPage</ObjectName>
+        <Layout>vertical</Layout>
+        <SizePolicy>me,me</SizePolicy>
+        <Children>
+          <WidgetGroup>
+            <ObjectName>PadGrid</ObjectName>
+            <Layout>horizontal</Layout>
+            <SizePolicy>me,me</SizePolicy>
+            <Children>
+              <WidgetGroup>
+                <ObjectName>PadColumn</ObjectName>
+                <Layout>vertical</Layout>
+                <SizePolicy>me,me</SizePolicy>
+                <Children>
+                  <Template src="skin:templates/controls/pad_button.xml"><SetVariable name="Text">1/4 BEAT</SetVariable><SetVariable name="Control">beatloop_0.25_toggle</SetVariable><SetVariable name="Display">beatloop_0.25_enabled</SetVariable><SetVariable name="Momentary">false</SetVariable></Template>
+                  <Template src="skin:templates/controls/pad_button.xml"><SetVariable name="Text">1/2 BEAT</SetVariable><SetVariable name="Control">beatloop_0.5_toggle</SetVariable><SetVariable name="Display">beatloop_0.5_enabled</SetVariable><SetVariable name="Momentary">false</SetVariable></Template>
+                  <Template src="skin:templates/controls/pad_button.xml"><SetVariable name="Text">1 BEAT</SetVariable><SetVariable name="Control">beatloop_1_toggle</SetVariable><SetVariable name="Display">beatloop_1_enabled</SetVariable><SetVariable name="Momentary">false</SetVariable></Template>
+                  <Template src="skin:templates/controls/pad_button.xml"><SetVariable name="Text">2 BEATS</SetVariable><SetVariable name="Control">beatloop_2_toggle</SetVariable><SetVariable name="Display">beatloop_2_enabled</SetVariable><SetVariable name="Momentary">false</SetVariable></Template>
+                </Children>
+              </WidgetGroup>
+              <WidgetGroup>
+                <ObjectName>PadColumn</ObjectName>
+                <Layout>vertical</Layout>
+                <SizePolicy>me,me</SizePolicy>
+                <Children>
+                  <Template src="skin:templates/controls/pad_button.xml"><SetVariable name="Text">4 BEATS</SetVariable><SetVariable name="Control">beatloop_4_toggle</SetVariable><SetVariable name="Display">beatloop_4_enabled</SetVariable><SetVariable name="Momentary">false</SetVariable></Template>
+                  <Template src="skin:templates/controls/pad_button.xml"><SetVariable name="Text">8 BEATS</SetVariable><SetVariable name="Control">beatloop_8_toggle</SetVariable><SetVariable name="Display">beatloop_8_enabled</SetVariable><SetVariable name="Momentary">false</SetVariable></Template>
+                  <Template src="skin:templates/controls/pad_button.xml"><SetVariable name="Text">16 BEATS</SetVariable><SetVariable name="Control">beatloop_16_toggle</SetVariable><SetVariable name="Display">beatloop_16_enabled</SetVariable><SetVariable name="Momentary">false</SetVariable></Template>
+                  <Template src="skin:templates/controls/pad_button.xml"><SetVariable name="Text">32 BEATS</SetVariable><SetVariable name="Control">beatloop_32_toggle</SetVariable><SetVariable name="Display">beatloop_32_enabled</SetVariable><SetVariable name="Momentary">false</SetVariable></Template>
+                </Children>
+              </WidgetGroup>
+            </Children>
+          </WidgetGroup>
+          <Template src="skin:templates/pad_mode.xml">
+            <SetVariable name="Mode">BEAT LOOP</SetVariable>
+          </Template>
+        </Children>
+      </WidgetGroup>
+
+      <!-- Page 3: BEAT JUMP -->
+      <WidgetGroup>
+        <ObjectName>PadPage</ObjectName>
+        <Layout>vertical</Layout>
+        <SizePolicy>me,me</SizePolicy>
+        <Children>
+          <WidgetGroup>
+            <ObjectName>PadGrid</ObjectName>
+            <Layout>horizontal</Layout>
+            <SizePolicy>me,me</SizePolicy>
+            <Children>
+              <WidgetGroup>
+                <ObjectName>PadColumn</ObjectName>
+                <Layout>vertical</Layout>
+                <SizePolicy>me,me</SizePolicy>
+                <Children>
+                  <Template src="skin:templates/controls/pad_button.xml"><SetVariable name="Text">&#x2039; 1</SetVariable><SetVariable name="Control">beatjump_1_backward</SetVariable><SetVariable name="Display">beatjump_1_backward</SetVariable><SetVariable name="Momentary">true</SetVariable></Template>
+                  <Template src="skin:templates/controls/pad_button.xml"><SetVariable name="Text">&#x2039; 2</SetVariable><SetVariable name="Control">beatjump_2_backward</SetVariable><SetVariable name="Display">beatjump_2_backward</SetVariable><SetVariable name="Momentary">true</SetVariable></Template>
+                  <Template src="skin:templates/controls/pad_button.xml"><SetVariable name="Text">&#x2039; 4</SetVariable><SetVariable name="Control">beatjump_4_backward</SetVariable><SetVariable name="Display">beatjump_4_backward</SetVariable><SetVariable name="Momentary">true</SetVariable></Template>
+                  <Template src="skin:templates/controls/pad_button.xml"><SetVariable name="Text">&#x2039; 8</SetVariable><SetVariable name="Control">beatjump_8_backward</SetVariable><SetVariable name="Display">beatjump_8_backward</SetVariable><SetVariable name="Momentary">true</SetVariable></Template>
+                </Children>
+              </WidgetGroup>
+              <WidgetGroup>
+                <ObjectName>PadColumn</ObjectName>
+                <Layout>vertical</Layout>
+                <SizePolicy>me,me</SizePolicy>
+                <Children>
+                  <Template src="skin:templates/controls/pad_button.xml"><SetVariable name="Text">1 &#x203A;</SetVariable><SetVariable name="Control">beatjump_1_forward</SetVariable><SetVariable name="Display">beatjump_1_forward</SetVariable><SetVariable name="Momentary">true</SetVariable></Template>
+                  <Template src="skin:templates/controls/pad_button.xml"><SetVariable name="Text">2 &#x203A;</SetVariable><SetVariable name="Control">beatjump_2_forward</SetVariable><SetVariable name="Display">beatjump_2_forward</SetVariable><SetVariable name="Momentary">true</SetVariable></Template>
+                  <Template src="skin:templates/controls/pad_button.xml"><SetVariable name="Text">4 &#x203A;</SetVariable><SetVariable name="Control">beatjump_4_forward</SetVariable><SetVariable name="Display">beatjump_4_forward</SetVariable><SetVariable name="Momentary">true</SetVariable></Template>
+                  <Template src="skin:templates/controls/pad_button.xml"><SetVariable name="Text">8 &#x203A;</SetVariable><SetVariable name="Control">beatjump_8_forward</SetVariable><SetVariable name="Display">beatjump_8_forward</SetVariable><SetVariable name="Momentary">true</SetVariable></Template>
+                </Children>
+              </WidgetGroup>
+            </Children>
+          </WidgetGroup>
+          <Template src="skin:templates/pad_mode.xml">
+            <SetVariable name="Mode">BEAT JUMP</SetVariable>
+          </Template>
+        </Children>
+      </WidgetGroup>
+
+      <!-- Page 4: LOOP ROLL -->
+      <WidgetGroup>
+        <ObjectName>PadPage</ObjectName>
+        <Layout>vertical</Layout>
+        <SizePolicy>me,me</SizePolicy>
+        <Children>
+          <WidgetGroup>
+            <ObjectName>PadGrid</ObjectName>
+            <Layout>horizontal</Layout>
+            <SizePolicy>me,me</SizePolicy>
+            <Children>
+              <WidgetGroup>
+                <ObjectName>PadColumn</ObjectName>
+                <Layout>vertical</Layout>
+                <SizePolicy>me,me</SizePolicy>
+                <Children>
+                  <Template src="skin:templates/controls/pad_button.xml"><SetVariable name="Text">ROLL 1/8</SetVariable><SetVariable name="Control">beatlooproll_0.125_activate</SetVariable><SetVariable name="Display">beatlooproll_0.125_activate</SetVariable><SetVariable name="Momentary">true</SetVariable></Template>
+                  <Template src="skin:templates/controls/pad_button.xml"><SetVariable name="Text">ROLL 1/4</SetVariable><SetVariable name="Control">beatlooproll_0.25_activate</SetVariable><SetVariable name="Display">beatlooproll_0.25_activate</SetVariable><SetVariable name="Momentary">true</SetVariable></Template>
+                  <Template src="skin:templates/controls/pad_button.xml"><SetVariable name="Text">ROLL 1/2</SetVariable><SetVariable name="Control">beatlooproll_0.5_activate</SetVariable><SetVariable name="Display">beatlooproll_0.5_activate</SetVariable><SetVariable name="Momentary">true</SetVariable></Template>
+                  <Template src="skin:templates/controls/pad_button.xml"><SetVariable name="Text">ROLL 1</SetVariable><SetVariable name="Control">beatlooproll_1_activate</SetVariable><SetVariable name="Display">beatlooproll_1_activate</SetVariable><SetVariable name="Momentary">true</SetVariable></Template>
+                </Children>
+              </WidgetGroup>
+              <WidgetGroup>
+                <ObjectName>PadColumn</ObjectName>
+                <Layout>vertical</Layout>
+                <SizePolicy>me,me</SizePolicy>
+                <Children>
+                  <Template src="skin:templates/controls/pad_button.xml"><SetVariable name="Text">ROLL 2</SetVariable><SetVariable name="Control">beatlooproll_2_activate</SetVariable><SetVariable name="Display">beatlooproll_2_activate</SetVariable><SetVariable name="Momentary">true</SetVariable></Template>
+                  <Template src="skin:templates/controls/pad_button.xml"><SetVariable name="Text">ROLL 4</SetVariable><SetVariable name="Control">beatlooproll_4_activate</SetVariable><SetVariable name="Display">beatlooproll_4_activate</SetVariable><SetVariable name="Momentary">true</SetVariable></Template>
+                  <Template src="skin:templates/controls/pad_button.xml"><SetVariable name="Text">ROLL 8</SetVariable><SetVariable name="Control">beatlooproll_8_activate</SetVariable><SetVariable name="Display">beatlooproll_8_activate</SetVariable><SetVariable name="Momentary">true</SetVariable></Template>
+                  <Template src="skin:templates/controls/pad_button.xml"><SetVariable name="Text">ROLL 16</SetVariable><SetVariable name="Control">beatlooproll_16_activate</SetVariable><SetVariable name="Display">beatlooproll_16_activate</SetVariable><SetVariable name="Momentary">true</SetVariable></Template>
+                </Children>
+              </WidgetGroup>
+            </Children>
+          </WidgetGroup>
+          <Template src="skin:templates/pad_mode.xml">
+            <SetVariable name="Mode">LOOP ROLL</SetVariable>
+          </Template>
+        </Children>
+      </WidgetGroup>
+
+    </Children>
+  </WidgetStack>
+</Template>

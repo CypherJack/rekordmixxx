@@ -1,0 +1,45 @@
+<!-- Sampler deck: samplers 1-8 under the left deck, 9-16 under the right deck (2 rows x 4 each). -->
+<Template>
+  <WidgetGroup>
+    <ObjectName>SamplerDeck</ObjectName>
+    <Layout>horizontal</Layout>
+    <SizePolicy>me,f</SizePolicy>
+    <Children>
+      <WidgetGroup>
+        <ObjectName>SamplerHalf</ObjectName>
+        <Layout>vertical</Layout>
+        <SizePolicy>me,f</SizePolicy>
+        <Children>
+          <Template src="skin:templates/sampler_row.xml"><SetVariable name="N1">1</SetVariable><SetVariable name="N2">2</SetVariable><SetVariable name="N3">3</SetVariable><SetVariable name="N4">4</SetVariable></Template>
+          <Template src="skin:templates/sampler_row.xml"><SetVariable name="N1">5</SetVariable><SetVariable name="N2">6</SetVariable><SetVariable name="N3">7</SetVariable><SetVariable name="N4">8</SetVariable></Template>
+        </Children>
+      </WidgetGroup>
+      <WidgetGroup>
+        <ObjectName>SamplerGap</ObjectName>
+        <Size>8f,1min</Size>
+      </WidgetGroup>
+      <!-- same width as the mixer panel above, so the two sampler halves sit under the decks -->
+      <WidgetGroup>
+        <ObjectName>SamplerGap</ObjectName>
+        <Size>112f,1min</Size>
+        <Connection>
+          <ConfigKey persist="true">[Skin],show_mixer</ConfigKey>
+          <BindProperty>visible</BindProperty>
+        </Connection>
+      </WidgetGroup>
+      <WidgetGroup>
+        <ObjectName>SamplerHalf</ObjectName>
+        <Layout>vertical</Layout>
+        <SizePolicy>me,f</SizePolicy>
+        <Children>
+          <Template src="skin:templates/sampler_row.xml"><SetVariable name="N1">9</SetVariable><SetVariable name="N2">10</SetVariable><SetVariable name="N3">11</SetVariable><SetVariable name="N4">12</SetVariable></Template>
+          <Template src="skin:templates/sampler_row.xml"><SetVariable name="N1">13</SetVariable><SetVariable name="N2">14</SetVariable><SetVariable name="N3">15</SetVariable><SetVariable name="N4">16</SetVariable></Template>
+        </Children>
+      </WidgetGroup>
+    </Children>
+    <Connection>
+      <ConfigKey persist="true">[Skin],show_samplers</ConfigKey>
+      <BindProperty>visible</BindProperty>
+    </Connection>
+  </WidgetGroup>
+</Template>

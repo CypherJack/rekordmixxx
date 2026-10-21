@@ -1,0 +1,39 @@
+<!-- SLIP / Q (quantize) / MT (master tempo = key lock). Variables: ChanNum -->
+<Template>
+  <SetVariable name="Group">[Channel<Variable name="ChanNum"/>]</SetVariable>
+  <WidgetGroup>
+    <ObjectName>SlipBlock</ObjectName>
+    <Layout>vertical</Layout>
+    <SizePolicy>f,f</SizePolicy>
+    <MinimumSize>40,112</MinimumSize>
+    <MaximumSize>40,112</MaximumSize>
+    <Children>
+      <Template src="skin:templates/controls/button.xml">
+        <SetVariable name="ObjectName">SlipButton</SetVariable>
+        <SetVariable name="TooltipId">slip_mode</SetVariable>
+        <SetVariable name="Size">40f,24f</SetVariable>
+        <SetVariable name="Text">SLIP</SetVariable>
+        <SetVariable name="LeftPush">false</SetVariable>
+        <SetVariable name="ConfigKey"><Variable name="Group"/>,slip_enabled</SetVariable>
+      </Template>
+      <WidgetGroup><Size>1min,1me</Size></WidgetGroup>
+      <Template src="skin:templates/controls/button.xml">
+        <SetVariable name="ObjectName">QuantizeButton</SetVariable>
+        <SetVariable name="TooltipId">quantize</SetVariable>
+        <SetVariable name="Size">40f,24f</SetVariable>
+        <SetVariable name="Text">Q</SetVariable>
+        <SetVariable name="LeftPush">false</SetVariable>
+        <SetVariable name="ConfigKey"><Variable name="Group"/>,quantize</SetVariable>
+      </Template>
+      <WidgetGroup><Size>1min,1me</Size></WidgetGroup>
+      <Template src="skin:templates/controls/button.xml">
+        <SetVariable name="ObjectName">MasterTempoButton</SetVariable>
+        <SetVariable name="TooltipId">keylock</SetVariable>
+        <SetVariable name="Size">40f,24f</SetVariable>
+        <SetVariable name="Text">MT</SetVariable>
+        <SetVariable name="LeftPush">false</SetVariable>
+        <SetVariable name="ConfigKey"><Variable name="Group"/>,keylock</SetVariable>
+      </Template>
+    </Children>
+  </WidgetGroup>
+</Template>

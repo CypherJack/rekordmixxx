@@ -1,0 +1,34 @@
+<!-- TRIM / HIGH / MID / LOW with captions. Variables: Group -->
+<Template>
+  <WidgetGroup>
+    <ObjectName>StripKnobs</ObjectName>
+    <Layout>vertical</Layout>
+    <SizePolicy>f,f</SizePolicy>
+    <Children>
+      <Template src="skin:templates/controls/knob_caption.xml">
+        <SetVariable name="ObjectName">TrimKnob</SetVariable>
+        <SetVariable name="TooltipId">pregain</SetVariable>
+        <SetVariable name="Label">TRIM</SetVariable>
+        <SetVariable name="ConfigKey"><Variable name="Group"/>,pregain</SetVariable>
+      </Template>
+      <Template src="skin:templates/controls/knob_caption.xml">
+        <SetVariable name="ObjectName">EqKnob</SetVariable>
+        <SetVariable name="TooltipId">EqualizerRack_effect_parameter</SetVariable>
+        <SetVariable name="Label">HIGH</SetVariable>
+        <SetVariable name="ConfigKey">[EqualizerRack1_<Variable name="Group"/>_Effect1],parameter3</SetVariable>
+      </Template>
+      <Template src="skin:templates/controls/knob_caption.xml">
+        <SetVariable name="ObjectName">EqKnob</SetVariable>
+        <SetVariable name="TooltipId">EqualizerRack_effect_parameter</SetVariable>
+        <SetVariable name="Label">MID</SetVariable>
+        <SetVariable name="ConfigKey">[EqualizerRack1_<Variable name="Group"/>_Effect1],parameter2</SetVariable>
+      </Template>
+      <Template src="skin:templates/controls/knob_caption.xml">
+        <SetVariable name="ObjectName">EqKnob</SetVariable>
+        <SetVariable name="TooltipId">EqualizerRack_effect_parameter</SetVariable>
+        <SetVariable name="Label">LOW</SetVariable>
+        <SetVariable name="ConfigKey">[EqualizerRack1_<Variable name="Group"/>_Effect1],parameter1</SetVariable>
+      </Template>
+    </Children>
+  </WidgetGroup>
+</Template>

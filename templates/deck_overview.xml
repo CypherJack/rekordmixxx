@@ -1,0 +1,56 @@
+<!-- Whole-track overview of one deck. Variables: ChanNum -->
+<Template>
+  <SetVariable name="Group">[Channel<Variable name="ChanNum"/>]</SetVariable>
+  <WidgetGroup>
+    <ObjectName>OverviewBox</ObjectName>
+    <Layout>horizontal</Layout>
+    <SizePolicy>me,f</SizePolicy>
+    <MinimumSize>-1,44</MinimumSize>
+    <MaximumSize>-1,44</MaximumSize>
+    <Children>
+      <Overview>
+        <TooltipId>waveform_overview</TooltipId>
+        <Group><Variable name="Group"/></Group>
+        <SizePolicy>me,me</SizePolicy>
+        <BgColor><Variable name="OverviewBg"/></BgColor>
+        <SignalColor><Variable name="SignalColor"/></SignalColor>
+        <SignalHighColor><Variable name="WaveHigh"/></SignalHighColor>
+        <SignalMidColor><Variable name="WaveMid"/></SignalMidColor>
+        <SignalLowColor><Variable name="WaveLow"/></SignalLowColor>
+        <SignalRGBHighColor><Variable name="WaveHigh"/></SignalRGBHighColor>
+        <SignalRGBMidColor><Variable name="WaveMid"/></SignalRGBMidColor>
+        <SignalRGBLowColor><Variable name="WaveLow"/></SignalRGBLowColor>
+        <PlayPosColor><Variable name="PlayPosColor"/></PlayPosColor>
+        <PlayedOverlayColor><Variable name="PlayedOverlayColor"/></PlayedOverlayColor>
+        <EndOfTrackColor><Variable name="EndOfTrackColor"/></EndOfTrackColor>
+        <LabelFontSize>9</LabelFontSize>
+        <LabelTextColor>#bdbdbd</LabelTextColor>
+        <DefaultMark>
+          <Align>bottom|right</Align>
+          <Color>#FF0000</Color>
+          <TextColor>#000000</TextColor>
+          <Text> %1 </Text>
+        </DefaultMark>
+        <Mark>
+          <Control>cue_point</Control>
+          <Text>C</Text>
+          <Align>bottom|right</Align>
+          <Color><Variable name="CueColor"/></Color>
+          <TextColor>#000000</TextColor>
+        </Mark>
+        <MarkRange>
+          <StartControl>loop_start_position</StartControl>
+          <EndControl>loop_end_position</EndControl>
+          <EnabledControl>loop_enabled</EnabledControl>
+          <Color><Variable name="LoopColor"/></Color>
+          <Opacity>0.5</Opacity>
+          <DisabledColor>#FFFFFF</DisabledColor>
+          <DisabledOpacity>0.2</DisabledOpacity>
+        </MarkRange>
+        <Connection>
+          <ConfigKey><Variable name="Group"/>,playposition</ConfigKey>
+        </Connection>
+      </Overview>
+    </Children>
+  </WidgetGroup>
+</Template>

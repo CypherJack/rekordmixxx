@@ -1,0 +1,21 @@
+<!-- Mixer channel, level meter on the right (decks 1 and 3). Variables: ChanNum -->
+<Template>
+  <SetVariable name="Group">[Channel<Variable name="ChanNum"/>]</SetVariable>
+  <WidgetGroup>
+    <ObjectName>ChannelStrip</ObjectName>
+    <Layout>vertical</Layout>
+    <SizePolicy>f,me</SizePolicy>
+    <Children>
+      <WidgetGroup>
+        <ObjectName>StripTop</ObjectName>
+        <Layout>horizontal</Layout>
+        <SizePolicy>f,f</SizePolicy>
+        <Children>
+          <Template src="skin:templates/strip_knobs.xml"/>
+          <Template src="skin:templates/strip_meter.xml"/>
+        </Children>
+      </WidgetGroup>
+      <Template src="skin:templates/strip_fader.xml"/>
+    </Children>
+  </WidgetGroup>
+</Template>

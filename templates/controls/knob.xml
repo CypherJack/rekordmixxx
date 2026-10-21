@@ -1,0 +1,36 @@
+<!--
+  Vector knob with value arc, no caption (see knob_labeled.xml) (crisp at any scale). One size everywhere (30px)
+  keeps the arc radius consistent; ArcRadius is in unscaled px.
+  Variables:
+    ObjectName, TooltipId
+    ConfigKey   [Group],control
+    ArcUnipolar true for 0..max knobs (gain, mix), false for centered (EQ, filter)
+-->
+<Template>
+  <WidgetGroup>
+    <ObjectName>KnobBox</ObjectName>
+    <Layout>vertical</Layout>
+    <SizePolicy>f,f</SizePolicy>
+    <Children>
+      <KnobComposed>
+        <ObjectName><Variable name="ObjectName"/></ObjectName>
+        <TooltipId><Variable name="TooltipId"/></TooltipId>
+        <Size>30f,30f</Size>
+        <BackPath scalemode="STRETCH_ASPECT">skin:images/knob_bg.svg</BackPath>
+        <Knob scalemode="STRETCH_ASPECT">skin:images/knob_indicator.svg</Knob>
+        <MinAngle><Variable name="KnobMinAngle"/></MinAngle>
+        <MaxAngle><Variable name="KnobMaxAngle"/></MaxAngle>
+        <ArcRadius>13</ArcRadius>
+        <ArcThickness>2.5</ArcThickness>
+        <ArcBgThickness>2.5</ArcBgThickness>
+        <ArcColor><Variable name="KnobArcColor"/></ArcColor>
+        <ArcBgColor>#2a2e35</ArcBgColor>
+        <ArcUnipolar><Variable name="ArcUnipolar"/></ArcUnipolar>
+        <ArcRoundCaps>true</ArcRoundCaps>
+        <Connection>
+          <ConfigKey><Variable name="ConfigKey"/></ConfigKey>
+        </Connection>
+      </KnobComposed>
+    </Children>
+  </WidgetGroup>
+</Template>

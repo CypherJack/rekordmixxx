@@ -1,0 +1,116 @@
+<!-- One scrolling waveform with its deck tab (number + loop in/out). Variables: ChanNum -->
+<Template>
+  <SetVariable name="Group">[Channel<Variable name="ChanNum"/>]</SetVariable>
+  <WidgetGroup>
+    <ObjectName>WaveformBox</ObjectName>
+    <Layout>horizontal</Layout>
+    <SizePolicy>me,me</SizePolicy>
+    <MinimumSize>-1,34</MinimumSize>
+    <Children>
+      <WidgetGroup>
+        <ObjectName>WaveformTab</ObjectName>
+        <Layout>vertical</Layout>
+        <SizePolicy>f,me</SizePolicy>
+        <MinimumSize>66,-1</MinimumSize>
+        <MaximumSize>66,-1</MaximumSize>
+        <Children>
+          <Label>
+            <ObjectName>WaveformTabNumber</ObjectName>
+            <Text><Variable name="ChanNum"/></Text>
+            <Size>1me,12f</Size>
+          </Label>
+          <WidgetGroup>
+            <ObjectName>LoopPill</ObjectName>
+            <Layout>horizontal</Layout>
+            <SizePolicy>me,f</SizePolicy>
+            <Children>
+              <Template src="skin:templates/controls/button.xml">
+                <SetVariable name="ObjectName">LoopInButton</SetVariable>
+                <SetVariable name="TooltipId">loop_in</SetVariable>
+                <SetVariable name="Size">1me,20f</SetVariable>
+                <SetVariable name="Text">[</SetVariable>
+                <SetVariable name="LeftPush">true</SetVariable>
+                <SetVariable name="ConfigKey"><Variable name="Group"/>,loop_in</SetVariable>
+              </Template>
+              <Template src="skin:templates/controls/button.xml">
+                <SetVariable name="ObjectName">LoopOutButton</SetVariable>
+                <SetVariable name="TooltipId">loop_out</SetVariable>
+                <SetVariable name="Size">1me,20f</SetVariable>
+                <SetVariable name="Text">]</SetVariable>
+                <SetVariable name="LeftPush">true</SetVariable>
+                <SetVariable name="ConfigKey"><Variable name="Group"/>,loop_out</SetVariable>
+              </Template>
+            </Children>
+          </WidgetGroup>
+          <WidgetGroup><Size>1me,1me</Size></WidgetGroup>
+        </Children>
+      </WidgetGroup>
+      <Visual>
+        <TooltipId>waveform_display</TooltipId>
+        <Channel><Variable name="ChanNum"/></Channel>
+        <SizePolicy>me,me</SizePolicy>
+        <BgColor><Variable name="WaveBg"/></BgColor>
+        <SignalColor><Variable name="SignalColor"/></SignalColor>
+        <!-- rekordbox 3-band colours: low = blue, mid = orange, high = white -->
+        <SignalHighColor><Variable name="WaveHigh"/></SignalHighColor>
+        <SignalMidColor><Variable name="WaveMid"/></SignalMidColor>
+        <SignalLowColor><Variable name="WaveLow"/></SignalLowColor>
+        <SignalRGBHighColor><Variable name="WaveHigh"/></SignalRGBHighColor>
+        <SignalRGBMidColor><Variable name="WaveMid"/></SignalRGBMidColor>
+        <SignalRGBLowColor><Variable name="WaveLow"/></SignalRGBLowColor>
+        <BeatColor><Variable name="BeatColor"/></BeatColor>
+        <AxesColor><Variable name="AxesColor"/></AxesColor>
+        <PlayPosColor><Variable name="PlayPosColor"/></PlayPosColor>
+        <EndOfTrackColor><Variable name="EndOfTrackColor"/></EndOfTrackColor>
+        <DefaultMark>
+          <Align>bottom|right</Align>
+          <Color>#FF0000</Color>
+          <TextColor>#000000</TextColor>
+          <Text> %1 </Text>
+        </DefaultMark>
+        <Mark>
+          <Control>cue_point</Control>
+          <Text>C</Text>
+          <Align>bottom|right</Align>
+          <Color><Variable name="CueColor"/></Color>
+          <TextColor>#000000</TextColor>
+        </Mark>
+        <MarkRange>
+          <StartControl>loop_start_position</StartControl>
+          <EndControl>loop_end_position</EndControl>
+          <EnabledControl>loop_enabled</EnabledControl>
+          <Color><Variable name="LoopColor"/></Color>
+          <Opacity>0.35</Opacity>
+          <DisabledColor>#FFFFFF</DisabledColor>
+          <DisabledOpacity>0.15</DisabledOpacity>
+        </MarkRange>
+        <Mark>
+          <Control>loop_start_position</Control>
+          <Text>IN</Text>
+          <Align>top|left</Align>
+          <Color><Variable name="LoopColor"/></Color>
+          <TextColor>#000000</TextColor>
+        </Mark>
+        <Mark>
+          <Control>loop_end_position</Control>
+          <Text>OUT</Text>
+          <Align>top|right</Align>
+          <Color><Variable name="LoopColor"/></Color>
+          <TextColor>#000000</TextColor>
+        </Mark>
+        <MarkRange>
+          <StartControl>intro_start_position</StartControl>
+          <EndControl>intro_end_position</EndControl>
+          <Color><Variable name="IntroOutroColor"/></Color>
+          <Opacity>0.15</Opacity>
+        </MarkRange>
+        <MarkRange>
+          <StartControl>outro_start_position</StartControl>
+          <EndControl>outro_end_position</EndControl>
+          <Color><Variable name="IntroOutroColor"/></Color>
+          <Opacity>0.15</Opacity>
+        </MarkRange>
+      </Visual>
+    </Children>
+  </WidgetGroup>
+</Template>

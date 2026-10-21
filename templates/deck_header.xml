@@ -1,0 +1,164 @@
+<!--
+  Track information panel: deck number, artwork, title / artist / BPM / key,
+  time readout, KEY SYNC + key shift, BEAT SYNC + MASTER.  Variables: ChanNum
+-->
+<Template>
+  <SetVariable name="Group">[Channel<Variable name="ChanNum"/>]</SetVariable>
+  <WidgetGroup>
+    <ObjectName>DeckHeader</ObjectName>
+    <Layout>horizontal</Layout>
+    <SizePolicy>me,f</SizePolicy>
+    <MinimumSize>-1,54</MinimumSize>
+    <MaximumSize>-1,54</MaximumSize>
+    <Children>
+      <Label>
+        <ObjectName>DeckNumber</ObjectName>
+        <Text><Variable name="ChanNum"/></Text>
+        <Alignment>center</Alignment>
+        <Size>14f,-1</Size>
+      </Label>
+      <CoverArt>
+        <ObjectName>DeckCover</ObjectName>
+        <TooltipId>coverart</TooltipId>
+        <Group><Variable name="Group"/></Group>
+        <Size>38f,38f</Size>
+        <Connection>
+          <ConfigKey persist="true">[Skin],show_coverart</ConfigKey>
+          <BindProperty>visible</BindProperty>
+        </Connection>
+      </CoverArt>
+      <WidgetGroup>
+        <ObjectName>TitleBox</ObjectName>
+        <Layout>vertical</Layout>
+        <SizePolicy>me,f</SizePolicy>
+        <MaximumSize>170,-1</MaximumSize>
+        <Children>
+          <TrackProperty>
+            <ObjectName>TrackTitle</ObjectName>
+            <TooltipId>track_title</TooltipId>
+            <Group><Variable name="Group"/></Group>
+            <Property>title</Property>
+            <Elide>right</Elide>
+            <SizePolicy>i,min</SizePolicy>
+          </TrackProperty>
+          <TrackProperty>
+            <ObjectName>TrackArtist</ObjectName>
+            <TooltipId>track_artist</TooltipId>
+            <Group><Variable name="Group"/></Group>
+            <Property>artist</Property>
+            <Elide>right</Elide>
+            <SizePolicy>i,min</SizePolicy>
+          </TrackProperty>
+        </Children>
+      </WidgetGroup>
+      <!-- BPM sits on the artist line, to the right of the title block -->
+      <WidgetGroup>
+        <ObjectName>BpmBox</ObjectName>
+        <Layout>vertical</Layout>
+        <SizePolicy>f,f</SizePolicy>
+        <MinimumSize>46,42</MinimumSize>
+        <MaximumSize>46,42</MaximumSize>
+        <Children>
+          <WidgetGroup><Size>1min,1me</Size></WidgetGroup>
+          <NumberBpm>
+            <ObjectName>BpmReadout</ObjectName>
+            <TooltipId>visual_bpm</TooltipId>
+            <Channel><Variable name="ChanNum"/></Channel>
+            <NumberOfDigits>2</NumberOfDigits>
+            <Alignment>left</Alignment>
+            <SizePolicy>min,f</SizePolicy>
+            <Connection>
+              <ConfigKey><Variable name="Group"/>,visual_bpm</ConfigKey>
+            </Connection>
+          </NumberBpm>
+        </Children>
+      </WidgetGroup>
+
+      <WidgetGroup><Size>1me,1min</Size></WidgetGroup>
+
+      <NumberPos>
+        <ObjectName>TrackTime</ObjectName>
+        <TooltipId>track_time</TooltipId>
+        <Channel><Variable name="ChanNum"/></Channel>
+        <Alignment>right</Alignment>
+        <SizePolicy>min,min</SizePolicy>
+        <Connection>
+          <ConfigKey><Variable name="Group"/>,playposition</ConfigKey>
+        </Connection>
+      </NumberPos>
+
+      <WidgetGroup>
+        <ObjectName>KeySyncBlock</ObjectName>
+        <Layout>vertical</Layout>
+        <SizePolicy>f,f</SizePolicy>
+        <Children>
+          <Template src="skin:templates/controls/button.xml">
+            <SetVariable name="ObjectName">KeySyncButton</SetVariable>
+            <SetVariable name="TooltipId">sync_reset_key</SetVariable>
+            <SetVariable name="Size">72f,20f</SetVariable>
+            <SetVariable name="Text">KEY SYNC</SetVariable>
+            <SetVariable name="LeftPush">true</SetVariable>
+            <SetVariable name="ConfigKey"><Variable name="Group"/>,sync_key</SetVariable>
+          </Template>
+          <WidgetGroup>
+            <ObjectName>KeyShiftRow</ObjectName>
+            <Layout>horizontal</Layout>
+            <SizePolicy>f,f</SizePolicy>
+            <Children>
+              <Template src="skin:templates/controls/button.xml">
+                <SetVariable name="ObjectName">KeyShiftButton</SetVariable>
+                <SetVariable name="TooltipId">pitch_down</SetVariable>
+                <SetVariable name="Size">20f,20f</SetVariable>
+                <SetVariable name="Text">&#x2039;</SetVariable>
+                <SetVariable name="LeftPush">true</SetVariable>
+                <SetVariable name="ConfigKey"><Variable name="Group"/>,pitch_down</SetVariable>
+              </Template>
+              <Key>
+                <ObjectName>KeyReadout</ObjectName>
+                <TooltipId>visual_key</TooltipId>
+                <Channel><Variable name="ChanNum"/></Channel>
+                <Alignment>center</Alignment>
+                <Size>32f,20f</Size>
+                <Connection>
+                  <ConfigKey><Variable name="Group"/>,visual_key</ConfigKey>
+                </Connection>
+              </Key>
+              <Template src="skin:templates/controls/button.xml">
+                <SetVariable name="ObjectName">KeyShiftButton</SetVariable>
+                <SetVariable name="TooltipId">pitch_up</SetVariable>
+                <SetVariable name="Size">20f,20f</SetVariable>
+                <SetVariable name="Text">&#x203A;</SetVariable>
+                <SetVariable name="LeftPush">true</SetVariable>
+                <SetVariable name="ConfigKey"><Variable name="Group"/>,pitch_up</SetVariable>
+              </Template>
+            </Children>
+          </WidgetGroup>
+        </Children>
+      </WidgetGroup>
+
+      <WidgetGroup>
+        <ObjectName>BeatSyncBlock</ObjectName>
+        <Layout>vertical</Layout>
+        <SizePolicy>f,f</SizePolicy>
+        <Children>
+          <Template src="skin:templates/controls/button.xml">
+            <SetVariable name="ObjectName">BeatSyncButton</SetVariable>
+            <SetVariable name="TooltipId">sync_enabled</SetVariable>
+            <SetVariable name="Size">72f,20f</SetVariable>
+            <SetVariable name="Text">BEAT SYNC</SetVariable>
+            <SetVariable name="LeftPush">false</SetVariable>
+            <SetVariable name="ConfigKey"><Variable name="Group"/>,sync_enabled</SetVariable>
+          </Template>
+          <Template src="skin:templates/controls/button.xml">
+            <SetVariable name="ObjectName">MasterButton</SetVariable>
+            <SetVariable name="TooltipId">sync_leader</SetVariable>
+            <SetVariable name="Size">72f,20f</SetVariable>
+            <SetVariable name="Text">MASTER</SetVariable>
+            <SetVariable name="LeftPush">false</SetVariable>
+            <SetVariable name="ConfigKey"><Variable name="Group"/>,sync_leader</SetVariable>
+          </Template>
+        </Children>
+      </WidgetGroup>
+    </Children>
+  </WidgetGroup>
+</Template>

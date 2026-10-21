@@ -1,0 +1,26 @@
+<!--
+  Generic performance pad (beat loop / beat jump / loop roll pads).
+  Variables: Text, Group (inherited), Control (action), Display (control driving the lit
+  state, optional: use [Skin],unused_pad when none), Momentary (true|false)
+  Lit state is displayValue=1 (QSS #PadButton).
+-->
+<Template>
+  <PushButton>
+    <ObjectName>PadButton</ObjectName>
+    <SizePolicy>me,me</SizePolicy>
+    <MinimumSize>30,20</MinimumSize>
+    <NumberStates>2</NumberStates>
+    <LeftClickIsPushButton><Variable name="Momentary"/></LeftClickIsPushButton>
+    <State><Number>0</Number><Text><Variable name="Text"/></Text></State>
+    <State><Number>1</Number><Text><Variable name="Text"/></Text></State>
+    <Connection>
+      <ConfigKey><Variable name="Group"/>,<Variable name="Control"/></ConfigKey>
+      <ButtonState>LeftButton</ButtonState>
+      <ConnectValueToWidget>false</ConnectValueToWidget>
+    </Connection>
+    <Connection>
+      <ConfigKey><Variable name="Group"/>,<Variable name="Display"/></ConfigKey>
+      <ConnectValueFromWidget>false</ConnectValueFromWidget>
+    </Connection>
+  </PushButton>
+</Template>

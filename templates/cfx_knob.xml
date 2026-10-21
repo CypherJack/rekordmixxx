@@ -1,0 +1,23 @@
+<!-- Colour-FX (quick effect) knob for one channel, with the channel number beside it. Variables: ChanNum -->
+<Template>
+  <WidgetGroup>
+    <ObjectName>CfxKnob</ObjectName>
+    <Layout>horizontal</Layout>
+    <SizePolicy>min,f</SizePolicy>
+    <Children>
+      <Label>
+        <ObjectName>CfxNumber</ObjectName>
+        <Text><Variable name="ChanNum"/></Text>
+        <Alignment>center</Alignment>
+        <Size>20f,24f</Size>
+      </Label>
+      <Template src="skin:templates/controls/knob.xml">
+        <SetVariable name="ObjectName">FilterKnob</SetVariable>
+        <SetVariable name="TooltipId">QuickEffectRack_super1</SetVariable>
+        <SetVariable name="ArcUnipolar">false</SetVariable>
+        <SetVariable name="ConfigKey">[QuickEffectRack1_[Channel<Variable name="ChanNum"/>]],super1</SetVariable>
+      </Template>
+      <WidgetGroup><Size>26f,1min</Size></WidgetGroup>
+    </Children>
+  </WidgetGroup>
+</Template>

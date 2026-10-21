@@ -1,0 +1,29 @@
+<!-- Headphone cue + channel fader (blue value line). Variables: Group -->
+<Template>
+  <WidgetGroup>
+    <ObjectName>StripBottom</ObjectName>
+    <Layout>vertical</Layout>
+    <SizePolicy>me,me</SizePolicy>
+    <Children>
+      <Template src="skin:templates/controls/button.xml">
+        <SetVariable name="ObjectName">PflButton</SetVariable>
+        <SetVariable name="TooltipId">pfl</SetVariable>
+        <SetVariable name="Size">46f,22f</SetVariable>
+        <SetVariable name="Text">CUE</SetVariable>
+        <SetVariable name="LeftPush">false</SetVariable>
+        <SetVariable name="ConfigKey"><Variable name="Group"/>,pfl</SetVariable>
+      </Template>
+      <Template src="skin:templates/controls/fader.xml">
+        <SetVariable name="ObjectName">VolumeFader</SetVariable>
+        <SetVariable name="TooltipId">channel_volume</SetVariable>
+        <SetVariable name="Size">22f,70me</SetVariable>
+        <SetVariable name="BarAxisPos">11</SetVariable>
+        <SetVariable name="Horizontal">false</SetVariable>
+        <SetVariable name="Unipolar">true</SetVariable>
+        <SetVariable name="Track">fader_track_v.svg</SetVariable>
+        <SetVariable name="Handle">fader_handle_v.svg</SetVariable>
+        <SetVariable name="ConfigKey"><Variable name="Group"/>,volume</SetVariable>
+      </Template>
+    </Children>
+  </WidgetGroup>
+</Template>

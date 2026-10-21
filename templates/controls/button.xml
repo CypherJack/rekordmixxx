@@ -1,0 +1,32 @@
+<!--
+  Generic two-state toggle/momentary button, styled entirely in QSS
+  (state colors via WPushButton#<ObjectName>[displayValue="0|1"]).
+  Variables:
+    ObjectName  QSS hook (required)
+    TooltipId   built-in tooltip id
+    Size        e.g. 40f,24f  or  30me,24f
+    Text        label (same for both states)
+    ConfigKey   [Group],control  (left click)
+    LeftPush    true = momentary (pressed while held), false = toggle
+-->
+<Template>
+  <PushButton>
+    <ObjectName><Variable name="ObjectName"/></ObjectName>
+    <TooltipId><Variable name="TooltipId"/></TooltipId>
+    <Size><Variable name="Size"/></Size>
+    <NumberStates>2</NumberStates>
+    <LeftClickIsPushButton><Variable name="LeftPush"/></LeftClickIsPushButton>
+    <State>
+      <Number>0</Number>
+      <Text><Variable name="Text"/></Text>
+    </State>
+    <State>
+      <Number>1</Number>
+      <Text><Variable name="Text"/></Text>
+    </State>
+    <Connection>
+      <ConfigKey><Variable name="ConfigKey"/></ConfigKey>
+      <ButtonState>LeftButton</ButtonState>
+    </Connection>
+  </PushButton>
+</Template>

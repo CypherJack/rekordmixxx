@@ -1,0 +1,18 @@
+<!--
+  Square icon toggle for the global bar (blue when on). The icon is set in QSS
+  per ObjectName. Variables: ObjectName, TooltipId, ConfigKey
+-->
+<Template>
+  <PushButton>
+    <ObjectName><Variable name="ObjectName"/></ObjectName>
+    <TooltipId><Variable name="TooltipId"/></TooltipId>
+    <Size>30f,22f</Size>
+    <NumberStates>2</NumberStates>
+    <State><Number>0</Number></State>
+    <State><Number>1</Number></State>
+    <Connection>
+      <ConfigKey persist="true"><Variable name="ConfigKey"/></ConfigKey>
+      <ButtonState>LeftButton</ButtonState>
+    </Connection>
+  </PushButton>
+</Template>

@@ -1,0 +1,7 @@
+<!-- Channel level meter + clip light. Variables: Group -->
+<Template>
+  <Template src="skin:templates/controls/vumeter.xml">
+    <SetVariable name="TooltipId">channel_VuMeter</SetVariable>
+    <SetVariable name="Suffix"></SetVariable>
+  </Template>
+</Template>

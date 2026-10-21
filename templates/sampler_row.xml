@@ -1,0 +1,14 @@
+<!-- Four sampler slots in a row. Variables: First (number of the first sampler) -->
+<Template>
+  <WidgetGroup>
+    <ObjectName>SamplerRow</ObjectName>
+    <Layout>horizontal</Layout>
+    <SizePolicy>me,f</SizePolicy>
+    <Children>
+      <Template src="skin:templates/sampler_slot.xml"><SetVariable name="SamplerNum"><Variable name="N1"/></SetVariable></Template>
+      <Template src="skin:templates/sampler_slot.xml"><SetVariable name="SamplerNum"><Variable name="N2"/></SetVariable></Template>
+      <Template src="skin:templates/sampler_slot.xml"><SetVariable name="SamplerNum"><Variable name="N3"/></SetVariable></Template>
+      <Template src="skin:templates/sampler_slot.xml"><SetVariable name="SamplerNum"><Variable name="N4"/></SetVariable></Template>
+    </Children>
+  </WidgetGroup>
+</Template>

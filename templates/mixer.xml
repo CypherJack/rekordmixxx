@@ -1,0 +1,38 @@
+<!-- Mixer panel: two (four) channel strips with the level meters side by side in the middle. -->
+<Template>
+  <WidgetGroup>
+    <ObjectName>Mixer</ObjectName>
+    <Layout>horizontal</Layout>
+    <SizePolicy>f,me</SizePolicy>
+    <Children>
+      <WidgetGroup>
+        <Layout>horizontal</Layout>
+        <SizePolicy>f,me</SizePolicy>
+        <Children>
+          <Template src="skin:templates/channel_strip_a.xml"><SetVariable name="ChanNum">3</SetVariable></Template>
+        </Children>
+        <Connection>
+          <ConfigKey persist="true">[Skin],show_4decks</ConfigKey>
+          <BindProperty>visible</BindProperty>
+        </Connection>
+      </WidgetGroup>
+      <Template src="skin:templates/channel_strip_a.xml"><SetVariable name="ChanNum">1</SetVariable></Template>
+      <Template src="skin:templates/channel_strip_b.xml"><SetVariable name="ChanNum">2</SetVariable></Template>
+      <WidgetGroup>
+        <Layout>horizontal</Layout>
+        <SizePolicy>f,me</SizePolicy>
+        <Children>
+          <Template src="skin:templates/channel_strip_b.xml"><SetVariable name="ChanNum">4</SetVariable></Template>
+        </Children>
+        <Connection>
+          <ConfigKey persist="true">[Skin],show_4decks</ConfigKey>
+          <BindProperty>visible</BindProperty>
+        </Connection>
+      </WidgetGroup>
+    </Children>
+    <Connection>
+      <ConfigKey persist="true">[Skin],show_mixer</ConfigKey>
+      <BindProperty>visible</BindProperty>
+    </Connection>
+  </WidgetGroup>
+</Template>

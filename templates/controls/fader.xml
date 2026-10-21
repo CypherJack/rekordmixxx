@@ -1,0 +1,31 @@
+<!--
+  Vector fader with value bar.
+  Variables:
+    ObjectName, TooltipId, ConfigKey
+    Size        e.g. 24f,100me (vertical) or 160me,24f (horizontal)
+    Horizontal  true|false
+    Unipolar    true = bar from min (volume), false = bar from center (rate, xfader)
+    Handle      handle svg file name in images/ (fader_handle.svg | xfader_handle.svg)
+    Track       track svg file name in images/
+    BarAxisPos  bar position across the fader, in px (= half the fader thickness)
+-->
+<Template>
+  <SliderComposed>
+    <ObjectName><Variable name="ObjectName"/></ObjectName>
+    <TooltipId><Variable name="TooltipId"/></TooltipId>
+    <Size><Variable name="Size"/></Size>
+    <Slider scalemode="STRETCH">skin:images/<Variable name="Track"/></Slider>
+    <Handle scalemode="STRETCH_ASPECT">skin:images/<Variable name="Handle"/></Handle>
+    <Horizontal><Variable name="Horizontal"/></Horizontal>
+    <BarWidth>3</BarWidth>
+    <BarAxisPos><Variable name="BarAxisPos"/></BarAxisPos>
+    <BarMargins>6,6</BarMargins>
+    <BarColor><Variable name="FaderBarColor"/></BarColor>
+    <BarBgColor>#00000000</BarBgColor>
+    <BarUnipolar><Variable name="Unipolar"/></BarUnipolar>
+    <BarRoundCaps>true</BarRoundCaps>
+    <Connection>
+      <ConfigKey><Variable name="ConfigKey"/></ConfigKey>
+    </Connection>
+  </SliderComposed>
+</Template>

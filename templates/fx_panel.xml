@@ -1,0 +1,51 @@
+<!-- rekordbox effect panel: FX1 | FX2 on the first row, colour FX (CFX) knobs on the second. -->
+<Template>
+  <WidgetGroup>
+    <ObjectName>FxPanel</ObjectName>
+    <Layout>vertical</Layout>
+    <SizePolicy>me,max</SizePolicy>
+    <Children>
+      <WidgetGroup>
+        <ObjectName>FxRow</ObjectName>
+        <Layout>horizontal</Layout>
+        <SizePolicy>me,max</SizePolicy>
+        <Children>
+          <Template src="skin:templates/fx_unit.xml"><SetVariable name="FxUnit">1</SetVariable></Template>
+          <Template src="skin:templates/fx_unit.xml"><SetVariable name="FxUnit">2</SetVariable></Template>
+        </Children>
+      </WidgetGroup>
+      <WidgetGroup>
+        <ObjectName>CfxRow</ObjectName>
+        <Layout>horizontal</Layout>
+        <SizePolicy>me,f</SizePolicy>
+        <Children>
+          <Label>
+            <ObjectName>FxUnitLabel</ObjectName>
+            <Text>CFX</Text>
+            <Alignment>center</Alignment>
+            <Size>40f,-1</Size>
+          </Label>
+          <Template src="skin:templates/cfx_knob.xml"><SetVariable name="ChanNum">1</SetVariable></Template>
+          <Template src="skin:templates/cfx_knob.xml"><SetVariable name="ChanNum">2</SetVariable></Template>
+          <WidgetGroup>
+            <Layout>horizontal</Layout>
+            <SizePolicy>min,f</SizePolicy>
+            <Children>
+              <Template src="skin:templates/cfx_knob.xml"><SetVariable name="ChanNum">3</SetVariable></Template>
+              <Template src="skin:templates/cfx_knob.xml"><SetVariable name="ChanNum">4</SetVariable></Template>
+            </Children>
+            <Connection>
+              <ConfigKey persist="true">[Skin],show_4decks</ConfigKey>
+              <BindProperty>visible</BindProperty>
+            </Connection>
+          </WidgetGroup>
+          <WidgetGroup><Size>1me,1min</Size></WidgetGroup>
+        </Children>
+      </WidgetGroup>
+    </Children>
+    <Connection>
+      <ConfigKey persist="true">[Rekordmixxx],show_fx</ConfigKey>
+      <BindProperty>visible</BindProperty>
+    </Connection>
+  </WidgetGroup>
+</Template>

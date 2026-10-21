@@ -1,0 +1,474 @@
+/*
+  Rekordmixxx — base style (scheme independent). Accent-coloured "on" states live in
+  scheme_*.qss, which Mixxx appends after this file.
+
+  Design tokens (QSS has no variables; keep in sync by hand), sampled from rekordbox 7:
+    window gap   #0a0a0a      waveform / pad / sampler / list black   #000000
+    panel        #1e1e1e      fx / cfx row   #232323 / #191919
+    button       #282828      button hover   #343434   pressed #404040
+    header bar   #0b0b10
+    text         #ffffff      text-dim #8c8c8c   text-off #555555
+    cue ring     #f2a413      play ring #2ecc55  rec #ff2d2d  sampler tag #e6208a
+    list select  #0b3f66      tree select #1f4255
+*/
+
+/* ---------- Typography: bundled fonts first, then OS natives ---------- */
+#Mixxx, WWidget, WLabel, WPushButton, WNumber, WNumberPos, WNumberRate,
+WKey, WTime, WTrackProperty, WRecordingDuration, WBeatSpinBox,
+WEffectSelector, WSearchLineEdit, WLibrarySidebar, WTrackTableView,
+WTrackTableViewHeader, WLibraryTextBrowser, QToolTip, QMenu {
+  font-family: "Open Sans", "Ubuntu", "Segoe UI", "Helvetica Neue", "Noto Sans", sans-serif;
+  font-weight: normal;
+  font-size: 11px;
+  color: #ffffff;
+}
+
+#Mixxx { background-color: #0a0a0a; }
+
+/* ---------- Layout rhythm: 2 px hairlines between panels ---------- */
+#SkinContainer { qproperty-layoutSpacing: 0; }
+#PerformanceArea { qproperty-layoutSpacing: 2; padding: 0px; }
+#WaveformsContainer { qproperty-layoutSpacing: 0; }
+#DecksMixerRow { qproperty-layoutSpacing: 2; }
+#DeckColumn { qproperty-layoutSpacing: 2; }
+
+/* ---------- Global bar ---------- */
+#GlobalBar {
+  background-color: #0b0b10;
+  border-bottom: 1px solid #000000;
+  qproperty-layoutSpacing: 4;
+  padding: 3px 8px 3px 8px;
+}
+#ModeName { font-size: 11px; font-weight: bold; letter-spacing: 0.5px; color: #ffffff; }
+#GlobalMeters { qproperty-layoutSpacing: 2; qproperty-layoutAlignment: 'AlignVCenter'; }
+#Clock { font-size: 12px; font-weight: bold; color: #ffffff; qproperty-alignment: AlignCenter; }
+
+/* Panel toggles: dark square, icon; accent fill when on (scheme) */
+WPushButton#PanelFx, WPushButton#PanelWaves, WPushButton#PanelSamplers, WPushButton#PanelMixer,
+WPushButton#PanelMic, WPushButton#PanelDecks, WPushButton#PanelLibrary {
+  background-color: #262626;
+  border: 0;
+  border-radius: 2px;
+}
+WPushButton#PanelFx:hover, WPushButton#PanelWaves:hover, WPushButton#PanelSamplers:hover,
+WPushButton#PanelMixer:hover, WPushButton#PanelMic:hover, WPushButton#PanelDecks:hover,
+WPushButton#PanelLibrary:hover { background-color: #343434; }
+WPushButton#PanelFx { image: url(skin:icons/fx.svg); }
+WPushButton#PanelWaves { image: url(skin:icons/wave.svg); }
+WPushButton#PanelSamplers { image: url(skin:icons/grid.svg); }
+WPushButton#PanelMixer { image: url(skin:icons/mixer.svg); }
+WPushButton#PanelMic { image: url(skin:icons/mic.svg); }
+WPushButton#PanelDecks { image: url(skin:icons/decks.svg); }
+WPushButton#PanelLibrary { image: url(skin:icons/library.svg); }
+
+/* ---------- Effect panel ---------- */
+#FxPanel { background-color: #1e1e1e; border-bottom: 1px solid #000000; }
+#FxRow { qproperty-layoutSpacing: 2; background-color: #000000; }
+#FxUnit {
+  background-color: #232323;
+  qproperty-layoutSpacing: 8;
+  padding: 4px 8px 4px 4px;
+}
+#FxSlot { qproperty-layoutSpacing: 2; }
+#FxSlotRow { qproperty-layoutSpacing: 4; }
+#FxAssign { qproperty-layoutSpacing: 2; }
+#FxAssignRow { qproperty-layoutSpacing: 2; }
+#FxKnobs { qproperty-layoutSpacing: 0; qproperty-layoutAlignment: 'AlignVCenter'; }
+#CfxRow {
+  background-color: #191919;
+  qproperty-layoutSpacing: 8;
+  padding: 3px 8px 3px 4px;
+}
+#CfxKnob { qproperty-layoutSpacing: 2; }
+#FxUnitLabel { font-size: 12px; font-weight: bold; color: #6e6e6e; qproperty-alignment: AlignCenter; }
+#CfxNumber { font-size: 11px; font-weight: bold; color: #8c8c8c; qproperty-alignment: AlignCenter; }
+WPushButton#FxAssignButton { background-color: #1b1b1b; color: #8c8c8c; border-radius: 0; font-size: 10px; }
+WPushButton#FxAssignButton:hover { background-color: #2c2c2c; }
+WPushButton#FxEnableButton { background-color: #2d2d2d; color: #b4b4b4; border: 1px solid #3a3a3a; border-radius: 2px; font-size: 9px; }
+WPushButton#FxEnableButton:hover { background-color: #383838; }
+WEffectSelector {
+  background-color: #2d2d2d;
+  border: 0;
+  border-radius: 2px;
+  padding: 1px 8px 1px 8px;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 10px;
+}
+WEffectSelector::drop-down { border: 0; width: 14px; }
+WEffectSelector::down-arrow { image: url(skin:icons/chevron_down.svg); width: 10px; height: 10px; }
+WEffectSelector QAbstractItemView {
+  background-color: #1e1e1e;
+  border: 1px solid #3a3a3a;
+  selection-background-color: #0b3f66;
+  selection-color: #ffffff;
+  outline: none;
+}
+
+/* ---------- Waveform panel ---------- */
+#Waveforms { background-color: #000000; qproperty-layoutSpacing: 0; }
+#WaveformRows { qproperty-layoutSpacing: 2; }
+#WaveformBox { qproperty-layoutSpacing: 0; background-color: #000000; }
+#WaveformTab {
+  background-color: #2b2b2b;
+  qproperty-layoutSpacing: 2;
+  padding: 4px 6px 4px 4px;
+}
+#WaveformTabNumber { font-size: 10px; font-weight: bold; color: #ffffff; }
+#LoopPill { background-color: #1a1a1a; border-radius: 10px; qproperty-layoutSpacing: 0; }
+WPushButton#LoopInButton, WPushButton#LoopOutButton {
+  background-color: transparent; border: 0; border-radius: 10px; color: #ffffff; font-size: 12px; font-weight: bold;
+}
+WPushButton#LoopInButton:hover, WPushButton#LoopOutButton:hover { background-color: #3a3a3a; }
+WPushButton#LoopInButton[pressed="true"], WPushButton#LoopOutButton[pressed="true"] { background-color: #4a4a4a; }
+#ZoomStrip { background-color: #1e1e1e; qproperty-layoutSpacing: 2; qproperty-layoutAlignment: 'AlignHCenter'; }
+WPushButton#ZoomButton {
+  background-color: #2a2a2a; border: 0; border-radius: 2px; color: #cfcfcf; font-size: 10px; padding: 0;
+}
+WPushButton#ZoomButton:hover { background-color: #3a3a3a; }
+
+/* ---------- Player panel ---------- */
+#Deck {
+  background-color: #1e1e1e;
+  qproperty-layoutSpacing: 4;
+  padding: 0px 6px 2px 6px;
+}
+
+/* Track information */
+#DeckHeader { qproperty-layoutSpacing: 6; padding: 6px 0px 0px 0px; }
+#DeckNumber { font-size: 10px; font-weight: bold; color: #ffffff; qproperty-alignment: 'AlignLeft | AlignTop'; }
+#DeckCover { background-color: #0a0a0a; border: 0; }
+#TitleBox { qproperty-layoutSpacing: 0; qproperty-layoutAlignment: 'AlignVCenter'; }
+#BpmBox { qproperty-layoutSpacing: 0; }
+#TrackTitle { font-size: 15px; font-weight: bold; color: #ffffff; }
+#TrackArtist { font-size: 12px; color: #8c8c8c; }
+#BpmReadout { font-size: 11px; color: #ffffff; }
+#TrackTime { font-size: 13px; font-weight: bold; color: #ffffff; padding: 0px; }
+#KeySyncBlock, #BeatSyncBlock { qproperty-layoutSpacing: 2; qproperty-layoutAlignment: 'AlignVCenter'; }
+#KeyShiftRow { qproperty-layoutSpacing: 0; }
+#KeyReadout { font-size: 12px; font-weight: bold; color: #ffffff; qproperty-alignment: AlignCenter; }
+WPushButton#KeySyncButton, WPushButton#BeatSyncButton {
+  background-color: #2b2b2b; border: 0; border-radius: 2px; color: #cfcfcf; font-size: 9px; font-weight: bold;
+}
+WPushButton#KeySyncButton:hover, WPushButton#BeatSyncButton:hover { background-color: #383838; }
+WPushButton#KeySyncButton[pressed="true"] { background-color: #404040; }
+WPushButton#MasterButton {
+  background-color: transparent; border: 1px solid #3a3a3a; border-radius: 2px; color: #cfcfcf; font-size: 9px; font-weight: bold;
+}
+WPushButton#MasterButton:hover { border-color: #8c8c8c; }
+WPushButton#KeyShiftButton {
+  background-color: transparent; border: 0; color: #cfcfcf; font-size: 14px; font-weight: bold; padding: 0;
+}
+WPushButton#KeyShiftButton:hover { color: #ffffff; background-color: #2b2b2b; }
+
+#OverviewBox { background-color: #000000; qproperty-layoutSpacing: 0; }
+
+/* Controls row */
+#DeckControls { qproperty-layoutSpacing: 6; }
+#PadStack { background-color: transparent; }
+#PadPage { qproperty-layoutSpacing: 3; }
+#PadGrid { qproperty-layoutSpacing: 3; }
+#PadColumn { qproperty-layoutSpacing: 3; }
+
+WHotcueButton, WPushButton#PadButton {
+  border: 0;
+  border-radius: 2px;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 0px 6px 0px 6px;
+}
+WHotcueButton[displayValue="0"] { background-color: #0f0f0f; color: #4d4d4d; }
+WHotcueButton[displayValue="0"]:hover { background-color: #1b1b1b; color: #8c8c8c; }
+WHotcueButton[dark="true"] { color: #000000; }
+WHotcueButton[light="true"] { color: #ffffff; }
+WPushButton#PadButton { background-color: #161616; color: #9a9a9a; font-size: 10px; }
+WPushButton#PadButton:hover { background-color: #242424; color: #ffffff; }
+WPushButton#PadModeButton {
+  background-color: transparent; border: 0; color: #cfcfcf; font-size: 10px; font-weight: bold; text-align: left; padding: 0;
+}
+WPushButton#PadModeButton:hover { color: #ffffff; }
+
+#LoopBlock { qproperty-layoutSpacing: 4; qproperty-layoutAlignment: 'AlignVCenter'; }
+#LoopRow { qproperty-layoutSpacing: 2; }
+WBeatSpinBox#LoopSize {
+  background-color: #262626;
+  border: 0;
+  border-radius: 2px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  qproperty-alignment: AlignCenter;
+}
+WBeatSpinBox#LoopSize::up-button, WBeatSpinBox#LoopSize::down-button { width: 0px; border: 0; }
+WPushButton#LoopHalveButton, WPushButton#LoopDoubleButton {
+  background-color: #262626; border: 0; border-radius: 2px; color: #cfcfcf; font-size: 18px; font-weight: bold; padding: 0;
+}
+WPushButton#LoopHalveButton:hover, WPushButton#LoopDoubleButton:hover { background-color: #343434; color: #ffffff; }
+WPushButton#AutoLoopButton, WPushButton#ManualLoopButton {
+  background-color: #1e1e1e; border: 1px solid #454545; border-radius: 2px; color: #ffffff; font-size: 10px; font-weight: bold; padding: 0;
+}
+WPushButton#AutoLoopButton:hover, WPushButton#ManualLoopButton:hover { background-color: #2c2c2c; }
+
+#Transport { qproperty-layoutSpacing: 0; qproperty-layoutAlignment: 'AlignHCenter'; }
+WPushButton#ReverseButton, WPushButton#SlipButton, WPushButton#QuantizeButton, WPushButton#MasterTempoButton {
+  background-color: #262626; border: 0; border-radius: 2px; color: #cfcfcf; font-size: 10px; font-weight: bold; padding: 0;
+}
+WPushButton#ReverseButton:hover, WPushButton#SlipButton:hover,
+WPushButton#QuantizeButton:hover, WPushButton#MasterTempoButton:hover { background-color: #343434; color: #ffffff; }
+
+/* CUE (orange ring) and PLAY (green ring) */
+WPushButton#CueButton {
+  background-color: #1e1e1e;
+  border: 2px solid #f2a413;
+  border-radius: 19px;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 0;
+}
+WPushButton#CueButton:hover { background-color: #2c2c2c; }
+/* lit (deck sits on its cue point): warm tint + orange label; filled only while pressed */
+WPushButton#CueButton[displayValue="1"] { background-color: #3a2a08; color: #f2a413; }
+WPushButton#CueButton[pressed="true"] { background-color: #f2a413; color: #000000; }
+WPushButton#PlayButton {
+  background-color: #1e1e1e;
+  border: 2px solid #2ecc55;
+  border-radius: 19px;
+  image: url(skin:icons/play.svg);
+  padding: 0;
+}
+WPushButton#PlayButton:hover { background-color: #2c2c2c; }
+WPushButton#PlayButton[displayValue="1"] { background-color: #12331c; image: url(skin:icons/play_active.svg); }
+
+/* Jog dial */
+#JogDial { background-color: transparent; }
+#JogBpm { font-size: 17px; font-weight: bold; color: #ffffff; qproperty-alignment: AlignCenter; }
+#JogRate { font-size: 9px; color: #bdbdbd; qproperty-alignment: AlignCenter; }
+WPushButton#BendDownButton, WPushButton#BendUpButton {
+  background-color: #1e1e1e; border: 1px solid #3a3a3a; border-radius: 2px; color: #cfcfcf; font-size: 11px; font-weight: bold; padding: 0;
+}
+WPushButton#BendDownButton:hover, WPushButton#BendUpButton:hover { background-color: #343434; }
+WPushButton#BendDownButton[pressed="true"], WPushButton#BendUpButton[pressed="true"] { background-color: #4a4a4a; }
+
+#SlipBlock { qproperty-layoutSpacing: 0; }
+#RateColumn { qproperty-layoutAlignment: 'AlignHCenter'; }
+
+/* Footer */
+#DeckFooter { qproperty-layoutSpacing: 6; padding: 0px 0px 2px 0px; }
+#FooterLabel { font-size: 9px; font-weight: bold; color: #8c8c8c; }
+WPushButton#FooterButton {
+  background-color: #262626; border: 0; border-radius: 2px; color: #cfcfcf; font-size: 10px; font-weight: bold; padding: 0;
+}
+WPushButton#FooterButton:hover { background-color: #343434; color: #ffffff; }
+WPushButton#LoadButton {
+  background-color: #262626; border: 0; border-radius: 2px; image: url(skin:icons/folder.svg); padding: 0;
+}
+WPushButton#LoadButton:hover { background-color: #343434; }
+
+/* ---------- Mixer ---------- */
+#Mixer {
+  background-color: #1e1e1e;
+  qproperty-layoutSpacing: 2;
+  padding: 6px 4px 4px 4px;
+}
+#ChannelStrip { qproperty-layoutSpacing: 4; qproperty-layoutAlignment: 'AlignHCenter | AlignTop'; }
+#StripTop { qproperty-layoutSpacing: 4; }
+#StripKnobs { qproperty-layoutSpacing: 0; }
+#MixKnobBox { qproperty-layoutSpacing: 0; qproperty-layoutAlignment: 'AlignHCenter'; }
+#KnobBox { qproperty-layoutSpacing: 0; qproperty-layoutAlignment: 'AlignHCenter'; }
+#KnobCaption { font-size: 9px; font-weight: bold; color: #ffffff; qproperty-alignment: AlignCenter; }
+#VuBox { qproperty-layoutSpacing: 2; }
+#StripBottom { qproperty-layoutSpacing: 4; qproperty-layoutAlignment: 'AlignHCenter'; }
+WPushButton#PflButton {
+  background-color: #262626; border: 0; border-radius: 2px; color: #cfcfcf; font-size: 10px; font-weight: bold; padding: 0;
+}
+WPushButton#PflButton:hover { background-color: #343434; color: #ffffff; }
+
+/* ---------- Microphone / headphone / record row ---------- */
+#BottomRow { background-color: #1e1e1e; qproperty-layoutSpacing: 6; padding: 3px 10px 3px 10px; }
+#MicBlock, #MixBlock, #RecBlock { qproperty-layoutSpacing: 6; qproperty-layoutAlignment: 'AlignVCenter'; }
+#MicIcon { background-image: url(skin:icons/mic.svg); background-repeat: no-repeat; background-position: center; }
+#HeadphoneIcon { background-image: url(skin:icons/headphones.svg); background-repeat: no-repeat; background-position: center; }
+WPushButton#TalkoverButton {
+  background-color: #262626; border: 0; border-radius: 2px; color: #cfcfcf; font-size: 9px; font-weight: bold; padding: 0;
+}
+WPushButton#TalkoverButton:hover { background-color: #343434; color: #ffffff; }
+WPushButton#RecButton { background-color: #262626; border: 0; border-radius: 2px; image: url(skin:icons/rec_idle.svg); padding: 0; }
+WPushButton#RecButton:hover { background-color: #343434; }
+WPushButton#RecButton[displayValue="1"] { image: url(skin:icons/rec.svg); }
+WPushButton#RecButton[displayValue="2"] { image: url(skin:icons/rec.svg); background-color: #4a1414; }
+#RecDuration { font-size: 11px; color: #8c8c8c; qproperty-alignment: AlignCenter; }
+
+/* ---------- Sampler deck ---------- */
+#SamplerDeck { background-color: #0a0a0a; qproperty-layoutSpacing: 0; padding: 0px; }
+#SamplerHalf { qproperty-layoutSpacing: 2; }
+#SamplerRow { qproperty-layoutSpacing: 2; }
+#SamplerSlot { background-color: #000000; border: 1px solid #1e1e1e; qproperty-layoutSpacing: 0; padding: 1px; }
+#SamplerOverview { background-color: #000000; }
+#SamplerBar { qproperty-layoutSpacing: 4; }
+#SamplerTitle { font-size: 11px; color: #ffffff; }
+/* tag: grey while the slot is empty, pink once a track is loaded (like rekordbox's sampler tiles).
+   The group carries the colour (highlight property); the button on top is transparent. */
+#SamplerTag { background-color: #262626; border-radius: 2px; qproperty-layoutSpacing: 0; }
+#SamplerTag[highlight="1"] { background-color: #e6208a; }
+WPushButton#SamplerPlayButton {
+  background-color: transparent; border: 0; border-radius: 2px; color: #d4d4d4; font-size: 11px; font-weight: bold; padding: 0;
+}
+WPushButton#SamplerPlayButton:hover { background-color: rgba(255, 255, 255, 40); color: #ffffff; }
+WPushButton#SamplerPlayButton[displayValue="1"] { background-color: #ffffff; color: #e6208a; }
+WPushButton#SamplerLoadButton {
+  background-color: #161616; border: 0; border-radius: 2px; image: url(skin:icons/folder.svg); padding: 0;
+}
+WPushButton#SamplerLoadButton:hover { background-color: #2a2a2a; }
+
+/* ---------- Generic buttons ---------- */
+WPushButton {
+  background-color: #282828;
+  border: 0;
+  border-radius: 2px;
+  color: #e6e6e6;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 0 4px;
+}
+WPushButton:hover { background-color: #343434; }
+
+/* ---------- Browser ---------- */
+#LibraryContainer { qproperty-layoutSpacing: 0; padding: 0px; background-color: #1e1e1e; }
+#LibraryHeader { background-color: #1e1e1e; qproperty-layoutSpacing: 8; padding: 4px 8px 4px 10px; border-bottom: 1px solid #000000; }
+#LibraryTitle { font-size: 11px; font-weight: bold; color: #8c8c8c; }
+#LibrarySplitter { background-color: #0a0a0a; }
+#SidebarBox { background-color: #1e1e1e; qproperty-layoutSpacing: 0; }
+#TrackTableBox { qproperty-layoutSpacing: 0; }
+
+WSearchLineEdit {
+  background-color: #000000;
+  border: 1px solid #333333;
+  border-radius: 3px;
+  padding: 1px 4px 1px 22px;
+  color: #ffffff;
+  selection-background-color: #0b3f66;
+  background-image: url(skin:icons/search.svg);
+  background-repeat: no-repeat;
+  background-position: left center;
+}
+WSearchLineEdit:focus { border-color: #0e76f1; }
+WSearchLineEdit::drop-down { border: 0; width: 0; }
+
+WLibrarySidebar, WTrackTableView, WLibraryTextBrowser {
+  background-color: #000000;
+  alternate-background-color: #1a1a1a;
+  border: 0;
+  outline: none;
+  color: #d4d4d4;
+  selection-background-color: #0b3f66;
+  selection-color: #ffffff;
+}
+WLibrarySidebar { background-color: #1e1e1e; alternate-background-color: #1e1e1e; color: #ffffff; font-size: 12px; }
+WLibrarySidebar::item { padding: 3px 2px; }
+WLibrarySidebar::item:selected { background-color: #1f4255; color: #ffffff; }
+WLibrarySidebar::item:hover { background-color: #2a2a2a; }
+WTrackTableView { gridline-color: transparent; font-size: 12px; }
+WTrackTableView::item { padding: 0px 4px; }
+WTrackTableViewHeader { background-color: #1e1e1e; }
+WTrackTableViewHeader::section {
+  background-color: #1e1e1e;
+  border: 0;
+  border-right: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+  padding: 3px 6px;
+  color: #8c8c8c;
+  font-weight: bold;
+  font-size: 11px;
+}
+
+QSplitter::handle, WSplitter::handle { background-color: #0a0a0a; image: none; }
+WSplitter::handle:hover { background-color: #2a2a2a; }
+QSplitter::handle:horizontal { width: 2px; }
+QSplitter::handle:vertical { height: 3px; }
+
+QScrollBar:vertical { background: #0a0a0a; width: 10px; margin: 0; }
+QScrollBar:horizontal { background: #0a0a0a; height: 10px; margin: 0; }
+QScrollBar::handle { background: #3a3a3a; border-radius: 4px; min-height: 24px; min-width: 24px; margin: 2px; }
+QScrollBar::handle:hover { background: #4a4a4a; }
+QScrollBar::add-line, QScrollBar::sub-line { width: 0; height: 0; border: 0; }
+QScrollBar::add-page, QScrollBar::sub-page { background: none; }
+
+QToolTip {
+  background-color: #2b2b2b;
+  border: 1px solid #454545;
+  color: #ffffff;
+  padding: 3px;
+}
+
+/* Menus/popups shown by skin widgets (main menu bar is native) */
+QMenu {
+  background-color: #1e1e1e;
+  border: 1px solid #3a3a3a;
+  color: #ffffff;
+}
+QMenu::item:selected { background-color: #0b3f66; }
+
+/* ---------- Library pages (Auto DJ, Analyze, Recordings, ...) and popups ---------- */
+#LibraryFeatureControls QPushButton {
+  background-color: #282828;
+  color: #e6e6e6;
+  border: 0;
+  border-radius: 2px;
+  margin: 0px 2px 3px 0px;
+  padding: 0px 8px;
+  height: 20px;
+  min-width: 32px;
+  font-weight: bold;
+  font-size: 10px;
+}
+#DlgAutoDJ #LibraryFeatureControls QPushButton { padding: 0px; }
+#LibraryFeatureControls QPushButton:hover { background-color: #343434; }
+#LibraryFeatureControls QPushButton:disabled { background-color: #202020; color: #555555; }
+#LibraryFeatureControls QLabel,
+#LibraryFeatureControls QRadioButton {
+  background: transparent;
+  color: #d4d4d4;
+  font-size: 11px;
+}
+#LibraryFeatureControls QRadioButton::indicator { width: 14px; height: 14px; }
+QRadioButton { color: #d4d4d4; background: transparent; }
+QCheckBox { color: #d4d4d4; background: transparent; }
+QLabel#labelProgress, QLabel#labelSelectionInfo { margin: 2px 5px 5px 1px; color: #8c8c8c; }
+QLabel#labelRecPrefix, QLabel#labelRecFilename, QLabel#labelRecStatistics { color: #d4d4d4; }
+
+QSpinBox, QDoubleSpinBox, QLineEdit {
+  background-color: #000000;
+  color: #ffffff;
+  border: 1px solid #333333;
+  border-radius: 2px;
+  padding: 1px 4px;
+  selection-background-color: #0b3f66;
+}
+#fadeModeCombobox {
+  background-color: #282828;
+  color: #e6e6e6;
+  border: 0;
+  border-radius: 2px;
+  padding: 1px 6px;
+}
+#fadeModeCombobox QAbstractItemView {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  selection-background-color: #0b3f66;
+  border: 1px solid #3a3a3a;
+}
+
+WCueMenuPopup, WTrackMenu, WTrackMenu QMenu, WCoverArtMenu, WLibrarySidebar QMenu,
+WTrackTableViewHeader QMenu, WColorPicker {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border: 1px solid #3a3a3a;
+}
+WCueMenuPopup QLabel, WColorPicker QLabel { color: #d4d4d4; background: transparent; }
+WCueMenuPopup QPushButton {
+  background-color: #282828; color: #e6e6e6; border: 0; border-radius: 2px; padding: 3px 8px;
+}
+WCueMenuPopup QPushButton:hover { background-color: #343434; }
+WTrackMenu::item:selected, WTrackMenu QMenu::item:selected { background-color: #0b3f66; }
+WTrackMenu::item:disabled { color: #666666; }

@@ -1,0 +1,111 @@
+<!--
+  One sampler slot: mini overview, play tag (grey when empty, pink when a track is loaded),
+  name, load button.  Variables: SamplerNum
+-->
+<Template>
+  <SetVariable name="Group">[Sampler<Variable name="SamplerNum"/>]</SetVariable>
+  <WidgetGroup>
+    <ObjectName>SamplerSlot</ObjectName>
+    <Layout>vertical</Layout>
+    <SizePolicy>me,f</SizePolicy>
+    <MinimumSize>60,42</MinimumSize>
+    <MaximumSize>-1,42</MaximumSize>
+    <Children>
+      <WidgetGroup>
+        <ObjectName>SamplerOverview</ObjectName>
+        <Layout>horizontal</Layout>
+        <SizePolicy>me,me</SizePolicy>
+        <Children>
+          <Overview>
+            <TooltipId>waveform_overview</TooltipId>
+            <Group><Variable name="Group"/></Group>
+            <SizePolicy>me,me</SizePolicy>
+            <BgColor>#000000</BgColor>
+            <SignalColor><Variable name="SignalColor"/></SignalColor>
+            <SignalHighColor><Variable name="WaveHigh"/></SignalHighColor>
+            <SignalMidColor><Variable name="WaveMid"/></SignalMidColor>
+            <SignalLowColor><Variable name="WaveLow"/></SignalLowColor>
+            <SignalRGBHighColor><Variable name="WaveHigh"/></SignalRGBHighColor>
+            <SignalRGBMidColor><Variable name="WaveMid"/></SignalRGBMidColor>
+            <SignalRGBLowColor><Variable name="WaveLow"/></SignalRGBLowColor>
+            <PlayPosColor><Variable name="PlayPosColor"/></PlayPosColor>
+            <PlayedOverlayColor><Variable name="PlayedOverlayColor"/></PlayedOverlayColor>
+            <EndOfTrackColor><Variable name="EndOfTrackColor"/></EndOfTrackColor>
+            <LabelFontSize>8</LabelFontSize>
+            <Connection>
+              <ConfigKey><Variable name="Group"/>,playposition</ConfigKey>
+            </Connection>
+          </Overview>
+        </Children>
+      </WidgetGroup>
+      <WidgetGroup>
+        <ObjectName>SamplerBar</ObjectName>
+        <Layout>horizontal</Layout>
+        <SizePolicy>me,f</SizePolicy>
+        <MinimumSize>-1,22</MinimumSize>
+        <MaximumSize>-1,22</MaximumSize>
+        <Children>
+          <!-- The tag colours itself: highlight=1 while a track is loaded (a property of this
+               group, because Qt does not re-style descendants when an ancestor property changes) -->
+          <WidgetGroup>
+            <ObjectName>SamplerTag</ObjectName>
+            <Layout>horizontal</Layout>
+            <SizePolicy>f,f</SizePolicy>
+            <MinimumSize>26,18</MinimumSize>
+            <MaximumSize>26,18</MaximumSize>
+            <Children>
+              <PushButton>
+                <ObjectName>SamplerPlayButton</ObjectName>
+                <TooltipId>play_start</TooltipId>
+                <Size>26f,18f</Size>
+                <NumberStates>2</NumberStates>
+                <State><Number>0</Number><Text>&#x279E;</Text></State>
+                <State><Number>1</Number><Text>&#x279E;</Text></State>
+                <Connection>
+                  <ConfigKey><Variable name="Group"/>,cue_gotoandplay</ConfigKey>
+                  <ButtonState>LeftButton</ButtonState>
+                  <ConnectValueToWidget>false</ConnectValueToWidget>
+                </Connection>
+                <Connection>
+                  <ConfigKey><Variable name="Group"/>,play</ConfigKey>
+                  <ConnectValueFromWidget>false</ConnectValueFromWidget>
+                </Connection>
+              </PushButton>
+            </Children>
+            <Connection>
+              <ConfigKey><Variable name="Group"/>,track_loaded</ConfigKey>
+              <BindProperty>highlight</BindProperty>
+            </Connection>
+          </WidgetGroup>
+          <!-- 0me: minimum 0, min-expanding. A TrackProperty with an 'i' policy gets zero width
+               inside a horizontal layout. -->
+          <TrackProperty>
+            <ObjectName>SamplerTitle</ObjectName>
+            <TooltipId>track_title</TooltipId>
+            <Group><Variable name="Group"/></Group>
+            <Property>title</Property>
+            <Elide>right</Elide>
+            <Size>0me,18f</Size>
+          </TrackProperty>
+          <PushButton>
+            <ObjectName>SamplerLoadButton</ObjectName>
+            <Tooltip>Load the selected track (right-click: eject)</Tooltip>
+            <Size>18f,18f</Size>
+            <NumberStates>1</NumberStates>
+            <LeftClickIsPushButton>true</LeftClickIsPushButton>
+            <RightClickIsPushButton>true</RightClickIsPushButton>
+            <State><Number>0</Number></State>
+            <Connection>
+              <ConfigKey><Variable name="Group"/>,LoadSelectedTrack</ConfigKey>
+              <ButtonState>LeftButton</ButtonState>
+            </Connection>
+            <Connection>
+              <ConfigKey><Variable name="Group"/>,eject</ConfigKey>
+              <ButtonState>RightButton</ButtonState>
+            </Connection>
+          </PushButton>
+        </Children>
+      </WidgetGroup>
+    </Children>
+  </WidgetGroup>
+</Template>

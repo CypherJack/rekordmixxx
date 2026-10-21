@@ -1,0 +1,68 @@
+<!--
+  Browser: search bar on top, source tree + artwork on the left, track list on the right.
+  'me,i' vertical policy lets the library shrink instead of pushing the window taller.
+-->
+<Template>
+  <WidgetGroup>
+    <ObjectName>LibraryContainer</ObjectName>
+    <Layout>vertical</Layout>
+    <SizePolicy>me,i</SizePolicy>
+    <MinimumSize>-1,100</MinimumSize>
+    <Children>
+      <WidgetGroup>
+        <ObjectName>LibraryHeader</ObjectName>
+        <Layout>horizontal</Layout>
+        <SizePolicy>me,f</SizePolicy>
+        <MinimumSize>-1,30</MinimumSize>
+        <MaximumSize>-1,30</MaximumSize>
+        <Children>
+          <Label><ObjectName>LibraryTitle</ObjectName><Text>BROWSE</Text><Size>80f,22f</Size></Label>
+          <WidgetGroup><Size>1me,1min</Size></WidgetGroup>
+          <SearchBox>
+            <SizePolicy>f,f</SizePolicy>
+            <MinimumSize>300,22</MinimumSize>
+            <MaximumSize>300,22</MaximumSize>
+          </SearchBox>
+        </Children>
+      </WidgetGroup>
+      <Splitter>
+        <ObjectName>LibrarySplitter</ObjectName>
+        <Orientation>horizontal</Orientation>
+        <SizePolicy>me,me</SizePolicy>
+        <SplitSizes>220,900</SplitSizes>
+        <SplitSizesConfigKey>[Rekordmixxx],library_split</SplitSizesConfigKey>
+        <Collapsible>1,0</Collapsible>
+        <Children>
+          <WidgetGroup>
+            <ObjectName>SidebarBox</ObjectName>
+            <Layout>vertical</Layout>
+            <SizePolicy>min,me</SizePolicy>
+            <MinimumSize>160,-1</MinimumSize>
+            <Children>
+              <LibrarySidebar></LibrarySidebar>
+              <CoverArt>
+                <ObjectName>LibraryCover</ObjectName>
+                <TooltipId>coverart</TooltipId>
+                <Size>100me,100f</Size>
+                <Connection>
+                  <ConfigKey persist="true">[Skin],show_library_coverart</ConfigKey>
+                  <BindProperty>visible</BindProperty>
+                </Connection>
+              </CoverArt>
+            </Children>
+          </WidgetGroup>
+          <WidgetGroup>
+            <ObjectName>TrackTableBox</ObjectName>
+            <Layout>vertical</Layout>
+            <SizePolicy>me,me</SizePolicy>
+            <Children>
+              <Library>
+                <ShowButtonText>true</ShowButtonText>
+              </Library>
+            </Children>
+          </WidgetGroup>
+        </Children>
+      </Splitter>
+    </Children>
+  </WidgetGroup>
+</Template>

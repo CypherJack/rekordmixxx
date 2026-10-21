@@ -1,0 +1,21 @@
+<!--
+  Hotcue pad. The track's cue colour is painted automatically by Mixxx
+  (WHotcueButton injects background-color for displayValue 1/2),
+  so only the empty state (displayValue 0) is styled in QSS.
+  Variables: Group (inherited), Num (1-36), Letter (pad label)
+-->
+<Template>
+  <HotcueButton>
+    <ObjectName>HotcueButton</ObjectName>
+    <TooltipId>hotcue</TooltipId>
+    <MinimumSize>40,20</MinimumSize>
+    <SizePolicy>me,me</SizePolicy>
+    <Group><Variable name="Group"/></Group>
+    <Hotcue><Variable name="Num"/></Hotcue>
+    <NumberStates>3</NumberStates>
+    <DimBrightThreshold>127</DimBrightThreshold>
+    <State><Number>0</Number><Text><Variable name="Letter"/></Text><Alignment>left</Alignment></State>
+    <State><Number>1</Number><Text><Variable name="Letter"/></Text><Alignment>left</Alignment></State>
+    <State><Number>2</Number><Text><Variable name="Letter"/></Text><Alignment>left</Alignment></State>
+  </HotcueButton>
+</Template>

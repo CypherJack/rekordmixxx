@@ -1,0 +1,58 @@
+<!-- Deck footer: gain, censor, tap, load / eject. Variables: ChanNum -->
+<Template>
+  <SetVariable name="Group">[Channel<Variable name="ChanNum"/>]</SetVariable>
+  <WidgetGroup>
+    <ObjectName>DeckFooter</ObjectName>
+    <Layout>horizontal</Layout>
+    <SizePolicy>me,f</SizePolicy>
+    <MinimumSize>-1,32</MinimumSize>
+    <MaximumSize>-1,32</MaximumSize>
+    <Children>
+      <Label>
+        <ObjectName>FooterLabel</ObjectName>
+        <Text>GAIN</Text>
+        <Size>30f,-1</Size>
+      </Label>
+      <Template src="skin:templates/controls/knob.xml">
+        <SetVariable name="ObjectName">GainKnob</SetVariable>
+        <SetVariable name="TooltipId">pregain</SetVariable>
+        <SetVariable name="ArcUnipolar">false</SetVariable>
+        <SetVariable name="ConfigKey"><Variable name="Group"/>,pregain</SetVariable>
+      </Template>
+      <WidgetGroup><Size>1me,1min</Size></WidgetGroup>
+      <Template src="skin:templates/controls/button.xml">
+        <SetVariable name="ObjectName">FooterButton</SetVariable>
+        <SetVariable name="TooltipId">reverse</SetVariable>
+        <SetVariable name="Size">56f,22f</SetVariable>
+        <SetVariable name="Text">CENSOR</SetVariable>
+        <SetVariable name="LeftPush">true</SetVariable>
+        <SetVariable name="ConfigKey"><Variable name="Group"/>,reverseroll</SetVariable>
+      </Template>
+      <Template src="skin:templates/controls/button.xml">
+        <SetVariable name="ObjectName">FooterButton</SetVariable>
+        <SetVariable name="TooltipId">bpm_tap</SetVariable>
+        <SetVariable name="Size">40f,22f</SetVariable>
+        <SetVariable name="Text">TAP</SetVariable>
+        <SetVariable name="LeftPush">true</SetVariable>
+        <SetVariable name="ConfigKey"><Variable name="Group"/>,bpm_tap</SetVariable>
+      </Template>
+      <WidgetGroup><Size>1me,1min</Size></WidgetGroup>
+      <Template src="skin:templates/controls/button.xml">
+        <SetVariable name="ObjectName">LoadButton</SetVariable>
+        <SetVariable name="TooltipId"></SetVariable>
+        <SetVariable name="Size">30f,22f</SetVariable>
+        <SetVariable name="Text"></SetVariable>
+        <SetVariable name="LeftPush">true</SetVariable>
+        <SetVariable name="ConfigKey"><Variable name="Group"/>,LoadSelectedTrack</SetVariable>
+      </Template>
+      <Template src="skin:templates/controls/button.xml">
+        <SetVariable name="ObjectName">FooterButton</SetVariable>
+        <SetVariable name="TooltipId">eject</SetVariable>
+        <SetVariable name="Size">30f,22f</SetVariable>
+        <SetVariable name="Text">&#x23CF;</SetVariable>
+        <SetVariable name="LeftPush">true</SetVariable>
+        <SetVariable name="ConfigKey"><Variable name="Group"/>,eject</SetVariable>
+      </Template>
+    </Children>
+  </WidgetGroup>
+</Template>

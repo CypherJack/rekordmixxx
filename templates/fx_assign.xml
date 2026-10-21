@@ -1,0 +1,11 @@
+<!-- Assign button for one effect unit target. Variables: FxGroup, Target ([Channel1], [Master], ...), Text -->
+<Template>
+  <Template src="skin:templates/controls/button.xml">
+    <SetVariable name="ObjectName">FxAssignButton</SetVariable>
+    <SetVariable name="TooltipId">EffectUnit_deck_enabled</SetVariable>
+    <SetVariable name="Size">24f,22f</SetVariable>
+    <SetVariable name="Text"><Variable name="Text"/></SetVariable>
+    <SetVariable name="LeftPush">false</SetVariable>
+    <SetVariable name="ConfigKey"><Variable name="FxGroup"/>,group_<Variable name="Target"/>_enable</SetVariable>
+  </Template>
+</Template>

@@ -1,0 +1,24 @@
+<!--
+  Mixer knob with caption underneath (TRIM / HIGH / MID / LOW).
+  Variables: ObjectName, TooltipId, ConfigKey, Label
+-->
+<Template>
+  <WidgetGroup>
+    <ObjectName>MixKnobBox</ObjectName>
+    <Layout>vertical</Layout>
+    <SizePolicy>f,f</SizePolicy>
+    <Children>
+      <Template src="skin:templates/controls/knob_plain.xml">
+        <SetVariable name="ObjectName"><Variable name="ObjectName"/></SetVariable>
+        <SetVariable name="TooltipId"><Variable name="TooltipId"/></SetVariable>
+        <SetVariable name="ConfigKey"><Variable name="ConfigKey"/></SetVariable>
+      </Template>
+      <Label>
+        <ObjectName>KnobCaption</ObjectName>
+        <Text><Variable name="Label"/></Text>
+        <Alignment>center</Alignment>
+        <Size>40f,11f</Size>
+      </Label>
+    </Children>
+  </WidgetGroup>
+</Template>

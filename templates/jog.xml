@@ -1,0 +1,76 @@
+<!--
+  Jog dial: white ring + blue ring around the BPM readout, red position marker (rotates with
+  the record, click-drag to scratch), +/- pitch bend. Layout-less group: children use <Pos>.
+  Variables: ChanNum
+-->
+<Template>
+  <SetVariable name="Group">[Channel<Variable name="ChanNum"/>]</SetVariable>
+  <WidgetGroup>
+    <ObjectName>JogDial</ObjectName>
+    <Size>112f,112f</Size>
+    <!-- The ring is a static background so it also shows where the OpenGL Spinny cannot draw -->
+    <BackPath scalemode="STRETCH_ASPECT">skin:images/jog_bg.svg</BackPath>
+    <Children>
+      <Spinny>
+        <TooltipId>spinny</TooltipId>
+        <Pos>0,0</Pos>
+        <Size>112f,112f</Size>
+        <Group><Variable name="Group"/></Group>
+        <PathBackground scalemode="STRETCH">skin:images/jog_bg.svg</PathBackground>
+        <PathForeground scalemode="STRETCH">skin:images/jog_marker.svg</PathForeground>
+        <ShowCover>false</ShowCover>
+      </Spinny>
+      <NumberBpm>
+        <ObjectName>JogBpm</ObjectName>
+        <TooltipId>visual_bpm</TooltipId>
+        <Pos>21,33</Pos>
+        <Size>70f,24f</Size>
+        <Channel><Variable name="ChanNum"/></Channel>
+        <NumberOfDigits>2</NumberOfDigits>
+        <Alignment>center</Alignment>
+        <Connection>
+          <ConfigKey><Variable name="Group"/>,visual_bpm</ConfigKey>
+        </Connection>
+      </NumberBpm>
+      <NumberRate>
+        <ObjectName>JogRate</ObjectName>
+        <TooltipId>rate_display</TooltipId>
+        <Pos>21,57</Pos>
+        <Size>70f,14f</Size>
+        <Channel><Variable name="ChanNum"/></Channel>
+        <NumberOfDigits>1</NumberOfDigits>
+        <Alignment>center</Alignment>
+      </NumberRate>
+      <PushButton>
+        <ObjectName>BendDownButton</ObjectName>
+        <TooltipId>rate_temp_down_rate_temp_down_small</TooltipId>
+        <Pos>36,75</Pos>
+        <Size>18f,14f</Size>
+        <NumberStates>2</NumberStates>
+        <LeftClickIsPushButton>true</LeftClickIsPushButton>
+        <State><Number>0</Number><Text>&#x2212;</Text></State>
+        <State><Number>1</Number><Text>&#x2212;</Text></State>
+        <Connection>
+          <ConfigKey><Variable name="Group"/>,rate_temp_down</ConfigKey>
+          <ButtonState>LeftButton</ButtonState>
+          <EmitOnPressAndRelease>true</EmitOnPressAndRelease>
+        </Connection>
+      </PushButton>
+      <PushButton>
+        <ObjectName>BendUpButton</ObjectName>
+        <TooltipId>rate_temp_up_rate_temp_up_small</TooltipId>
+        <Pos>58,75</Pos>
+        <Size>18f,14f</Size>
+        <NumberStates>2</NumberStates>
+        <LeftClickIsPushButton>true</LeftClickIsPushButton>
+        <State><Number>0</Number><Text>+</Text></State>
+        <State><Number>1</Number><Text>+</Text></State>
+        <Connection>
+          <ConfigKey><Variable name="Group"/>,rate_temp_up</ConfigKey>
+          <ButtonState>LeftButton</ButtonState>
+          <EmitOnPressAndRelease>true</EmitOnPressAndRelease>
+        </Connection>
+      </PushButton>
+    </Children>
+  </WidgetGroup>
+</Template>

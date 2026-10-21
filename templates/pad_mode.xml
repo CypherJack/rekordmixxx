@@ -1,0 +1,17 @@
+<!-- Pad mode selector under the pads: left click = next mode, right click = previous. Variables: ChanNum, Mode -->
+<Template>
+  <PushButton>
+    <ObjectName>PadModeButton</ObjectName>
+    <Size>1me,16f</Size>
+    <NumberStates>1</NumberStates>
+    <State><Number>0</Number><Text><Variable name="Mode"/>  &#x25BE;</Text><Alignment>left</Alignment></State>
+    <Connection>
+      <ConfigKey>[Rekordmixxx],padmode_next_<Variable name="ChanNum"/></ConfigKey>
+      <ButtonState>LeftButton</ButtonState>
+    </Connection>
+    <Connection>
+      <ConfigKey>[Rekordmixxx],padmode_prev_<Variable name="ChanNum"/></ConfigKey>
+      <ButtonState>RightButton</ButtonState>
+    </Connection>
+  </PushButton>
+</Template>

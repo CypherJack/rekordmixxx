@@ -1,0 +1,36 @@
+<!--
+  Vertical VU meter with clip light. Uses the 2.4+ control names.
+  Variables: Group ([Channel1] | [Main]), Suffix ("" | _left | _right), TooltipId
+-->
+<Template>
+  <WidgetGroup>
+    <ObjectName>VuBox</ObjectName>
+    <Layout>vertical</Layout>
+    <SizePolicy>f,me</SizePolicy>
+    <Children>
+      <StatusLight>
+        <ObjectName>ClipLight</ObjectName>
+        <Size>6f,6f</Size>
+        <PathBack scalemode="STRETCH">skin:images/clip_off.svg</PathBack>
+        <PathStatusLight scalemode="STRETCH">skin:images/clip_on.svg</PathStatusLight>
+        <Connection>
+          <ConfigKey><Variable name="Group"/>,peak_indicator<Variable name="Suffix"/></ConfigKey>
+        </Connection>
+      </StatusLight>
+      <VuMeter>
+        <TooltipId><Variable name="TooltipId"/></TooltipId>
+        <Size>6f,40me</Size>
+        <PathBack scalemode="STRETCH">skin:images/vu_bg.svg</PathBack>
+        <PathVu scalemode="STRETCH">skin:images/vu_on.svg</PathVu>
+        <Horizontal>false</Horizontal>
+        <PeakHoldSize>3</PeakHoldSize>
+        <PeakHoldTime>500</PeakHoldTime>
+        <PeakFallTime>50</PeakFallTime>
+        <PeakFallStep>2</PeakFallStep>
+        <Connection>
+          <ConfigKey><Variable name="Group"/>,vu_meter<Variable name="Suffix"/></ConfigKey>
+        </Connection>
+      </VuMeter>
+    </Children>
+  </WidgetGroup>
+</Template>

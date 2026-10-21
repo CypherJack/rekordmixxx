@@ -1,0 +1,64 @@
+<!--
+  Effect unit (rekordbox FX1 / FX2): label, assign grid, three slots, mix + super knobs.
+  Variables: FxUnit (1-4)
+-->
+<Template>
+  <SetVariable name="FxGroup">[EffectRack1_EffectUnit<Variable name="FxUnit"/>]</SetVariable>
+  <WidgetGroup>
+    <ObjectName>FxUnit</ObjectName>
+    <Layout>horizontal</Layout>
+    <SizePolicy>me,f</SizePolicy>
+    <Children>
+      <Label>
+        <ObjectName>FxUnitLabel</ObjectName>
+        <Text>FX<Variable name="FxUnit"/></Text>
+        <Alignment>center</Alignment>
+        <Size>40f,-1</Size>
+      </Label>
+      <WidgetGroup>
+        <ObjectName>FxAssign</ObjectName>
+        <Layout>vertical</Layout>
+        <SizePolicy>f,f</SizePolicy>
+        <Children>
+          <WidgetGroup>
+            <ObjectName>FxAssignRow</ObjectName>
+            <Layout>horizontal</Layout>
+            <SizePolicy>f,f</SizePolicy>
+            <Children>
+              <Template src="skin:templates/fx_assign.xml"><SetVariable name="Target">[Channel1]</SetVariable><SetVariable name="Text">1</SetVariable></Template>
+              <Template src="skin:templates/fx_assign.xml"><SetVariable name="Target">[Channel2]</SetVariable><SetVariable name="Text">2</SetVariable></Template>
+              <Template src="skin:templates/fx_assign.xml"><SetVariable name="Target">[Headphone]</SetVariable><SetVariable name="Text">H</SetVariable></Template>
+            </Children>
+          </WidgetGroup>
+          <WidgetGroup>
+            <ObjectName>FxAssignRow</ObjectName>
+            <Layout>horizontal</Layout>
+            <SizePolicy>f,f</SizePolicy>
+            <Children>
+              <Template src="skin:templates/fx_assign.xml"><SetVariable name="Target">[Channel3]</SetVariable><SetVariable name="Text">3</SetVariable></Template>
+              <Template src="skin:templates/fx_assign.xml"><SetVariable name="Target">[Channel4]</SetVariable><SetVariable name="Text">4</SetVariable></Template>
+              <Template src="skin:templates/fx_assign.xml"><SetVariable name="Target">[Master]</SetVariable><SetVariable name="Text">M</SetVariable></Template>
+            </Children>
+          </WidgetGroup>
+        </Children>
+      </WidgetGroup>
+      <Template src="skin:templates/fx_slot.xml"><SetVariable name="FxNum">1</SetVariable></Template>
+      <Template src="skin:templates/fx_slot.xml"><SetVariable name="FxNum">2</SetVariable></Template>
+      <Template src="skin:templates/fx_slot.xml"><SetVariable name="FxNum">3</SetVariable></Template>
+      <WidgetGroup>
+        <ObjectName>FxKnobs</ObjectName>
+        <Layout>vertical</Layout>
+        <SizePolicy>f,f</SizePolicy>
+        <Children>
+          <Template src="skin:templates/controls/knob_labeled.xml">
+            <SetVariable name="ObjectName">FxMixKnob</SetVariable>
+            <SetVariable name="TooltipId">EffectUnit_mix</SetVariable>
+            <SetVariable name="ArcUnipolar">true</SetVariable>
+            <SetVariable name="Label">D/W</SetVariable>
+            <SetVariable name="ConfigKey"><Variable name="FxGroup"/>,mix</SetVariable>
+          </Template>
+        </Children>
+      </WidgetGroup>
+    </Children>
+  </WidgetGroup>
+</Template>
