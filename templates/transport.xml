@@ -1,4 +1,4 @@
-<!-- REV + CUE (orange ring) + PLAY (green ring). Variables: ChanNum -->
+<!-- CUE (orange ring) + PLAY (green ring). Variables: ChanNum -->
 <Template>
   <SetVariable name="Group">[Channel<Variable name="ChanNum"/>]</SetVariable>
   <WidgetGroup>
@@ -8,14 +8,6 @@
     <MinimumSize>44,-1</MinimumSize>
     <MaximumSize>44,-1</MaximumSize>
     <Children>
-      <Template src="skin:templates/controls/button.xml">
-        <SetVariable name="ObjectName">ReverseButton</SetVariable>
-        <SetVariable name="TooltipId">reverse</SetVariable>
-        <SetVariable name="Size">44f,22f</SetVariable>
-        <SetVariable name="Text">REV</SetVariable>
-        <SetVariable name="LeftPush">false</SetVariable>
-        <SetVariable name="ConfigKey"><Variable name="Group"/>,reverse</SetVariable>
-      </Template>
       <WidgetGroup><Size>1min,1me</Size></WidgetGroup>
       <PushButton>
         <ObjectName>CueButton</ObjectName>
@@ -67,6 +59,8 @@
           <ConnectValueFromWidget>false</ConnectValueFromWidget>
         </Connection>
       </PushButton>
+      <WidgetGroup><Size>1min,1me</Size></WidgetGroup>
+      <WidgetGroup><Size>1min,19f</Size></WidgetGroup>
     </Children>
   </WidgetGroup>
 </Template>

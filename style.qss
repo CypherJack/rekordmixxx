@@ -135,18 +135,25 @@ WPushButton#ZoomButton:hover { background-color: #3a3a3a; }
 }
 
 /* Track information */
-#DeckHeader { qproperty-layoutSpacing: 6; padding: 6px 0px 0px 0px; }
-#DeckNumber { font-size: 10px; font-weight: bold; color: #ffffff; qproperty-alignment: 'AlignLeft | AlignTop'; }
+#DeckHeader { qproperty-layoutSpacing: 10; padding: 6px 0px 0px 0px; }
+#DeckNumber { font-size: 12px; font-weight: bold; color: #ffffff; qproperty-alignment: 'AlignLeft | AlignTop'; }
 #DeckCover { background-color: #0a0a0a; border: 0; }
 #TitleBox { qproperty-layoutSpacing: 0; qproperty-layoutAlignment: 'AlignVCenter'; }
-#BpmBox { qproperty-layoutSpacing: 0; }
-#TrackTitle { font-size: 15px; font-weight: bold; color: #ffffff; }
-#TrackArtist { font-size: 12px; color: #8c8c8c; }
-#BpmReadout { font-size: 11px; color: #ffffff; }
-#TrackTime { font-size: 13px; font-weight: bold; color: #ffffff; padding: 0px; }
+#InfoColumn { qproperty-layoutSpacing: 0; }
+#TimeBox { qproperty-layoutAlignment: 'AlignVCenter'; padding: 0 16px 0 16px; }
+#BpmBox { qproperty-layoutSpacing: 0; qproperty-layoutAlignment: 'AlignVCenter'; }
+#TrackTitle { font-size: 14px; font-weight: bold; color: #ffffff; }
+#TrackArtist, #TrackBpm, #TrackKey { font-size: 13px; font-weight: normal; color: #8c8c8c; }
+#ArtistRow { qproperty-layoutSpacing: 14; }
+#BpmReadout { font-size: 14px; font-weight: bold; color: #ffffff; }
+#HeaderKey { font-size: 16px; font-weight: bold; color: #ffffff; padding-left: 0px; margin-left: 6px; margin-right: 18px; }
+#TrackTime { font-size: 14px; font-weight: bold; color: #ffffff; padding: 0px; qproperty-alignment: 'AlignRight | AlignVCenter'; }
+#TrackDuration { font-size: 13px; font-weight: normal; color: #8c8c8c; qproperty-alignment: 'AlignRight | AlignVCenter'; }
 #KeySyncBlock, #BeatSyncBlock { qproperty-layoutSpacing: 2; qproperty-layoutAlignment: 'AlignVCenter'; }
 #KeyShiftRow { qproperty-layoutSpacing: 0; }
-#KeyReadout { font-size: 12px; font-weight: bold; color: #ffffff; qproperty-alignment: AlignCenter; }
+#OriginalKey { font-size: 13px; font-weight: normal; color: #8c8c8c; }
+/* the padding gives WKey a box; without one stock Mixxx draws neither the key nor its colour bar */
+#KeyReadout { font-size: 14px; font-weight: bold; color: #ffffff; qproperty-alignment: AlignCenter; padding: 0px 0px 0px 2px; }
 WPushButton#KeySyncButton, WPushButton#BeatSyncButton {
   background-color: #2b2b2b; border: 0; border-radius: 2px; color: #cfcfcf; font-size: 9px; font-weight: bold;
 }
@@ -173,22 +180,25 @@ WPushButton#KeyShiftButton:hover { color: #ffffff; background-color: #2b2b2b; }
 WHotcueButton, WPushButton#PadButton {
   border: 0;
   border-radius: 2px;
-  font-size: 11px;
-  font-weight: bold;
+  font-size: 15px;
+  font-weight: normal;
   padding: 0px 6px 0px 6px;
 }
 WHotcueButton[displayValue="0"] { background-color: #0f0f0f; color: #4d4d4d; }
 WHotcueButton[displayValue="0"]:hover { background-color: #1b1b1b; color: #8c8c8c; }
+WHotcueButton[displayValue="1"] { background-color: #262626; border: 1px solid #333333; }
+WHotcueButton[displayValue="1"]:hover { background-color: #303030; }
+WHotcueButton[displayValue="2"] { background-color: #3a3a3a; border: 1px solid #e6e6e6; }
 WHotcueButton[dark="true"] { color: #000000; }
 WHotcueButton[light="true"] { color: #ffffff; }
-WPushButton#PadButton { background-color: #161616; color: #9a9a9a; font-size: 10px; }
+WPushButton#PadButton { background-color: #161616; color: #9a9a9a; font-size: 13px; }
 WPushButton#PadButton:hover { background-color: #242424; color: #ffffff; }
 WPushButton#PadModeButton {
   background-color: transparent; border: 0; color: #cfcfcf; font-size: 10px; font-weight: bold; text-align: left; padding: 0;
 }
 WPushButton#PadModeButton:hover { color: #ffffff; }
 
-#LoopBlock { qproperty-layoutSpacing: 4; qproperty-layoutAlignment: 'AlignVCenter'; }
+#LoopBlock { qproperty-layoutSpacing: 4; }
 #LoopRow { qproperty-layoutSpacing: 2; }
 WBeatSpinBox#LoopSize {
   background-color: #262626;
@@ -251,7 +261,6 @@ WPushButton#BendDownButton:hover, WPushButton#BendUpButton:hover { background-co
 WPushButton#BendDownButton[pressed="true"], WPushButton#BendUpButton[pressed="true"] { background-color: #4a4a4a; }
 
 #SlipBlock { qproperty-layoutSpacing: 0; }
-#RateColumn { qproperty-layoutAlignment: 'AlignHCenter'; }
 
 /* Footer */
 #DeckFooter { qproperty-layoutSpacing: 6; padding: 0px 0px 2px 0px; }
@@ -283,6 +292,20 @@ WPushButton#PflButton {
   background-color: #262626; border: 0; border-radius: 2px; color: #cfcfcf; font-size: 10px; font-weight: bold; padding: 0;
 }
 WPushButton#PflButton:hover { background-color: #343434; color: #ffffff; }
+
+/* Mixer channels: flat, VU meters beside the faders towards the centre */
+#Mixer { background-color: #141414; padding: 6px 4px 6px 4px; qproperty-layoutSpacing: 2; }
+#ChannelStrip { qproperty-layoutSpacing: 3; }
+#ChannelColumn { qproperty-layoutSpacing: 2; qproperty-layoutAlignment: 'AlignHCenter | AlignTop'; }
+#FaderBox { qproperty-layoutAlignment: 'AlignHCenter'; }
+#VuBox { qproperty-layoutSpacing: 2; padding-bottom: 2px; }
+#MixKnobBox { qproperty-layoutSpacing: 0; qproperty-layoutAlignment: 'AlignHCenter'; }
+#MixLabels { qproperty-layoutSpacing: 2; padding-top: 0; }
+#MixLabels WLabel#MixRowLabel { font-size: 8px; font-weight: bold; color: #6e6e6e; qproperty-alignment: AlignCenter; }
+WPushButton#PflButton {
+  background-color: #2a2a2a; border: 0; border-radius: 2px; padding: 2px; image: url(skin:icons/headphones.svg);
+}
+WPushButton#PflButton[displayValue="1"] { background-color: #f2a413; }
 
 /* ---------- Microphone / headphone / record row ---------- */
 #BottomRow { background-color: #1e1e1e; qproperty-layoutSpacing: 6; padding: 3px 10px 3px 10px; }
@@ -472,3 +495,13 @@ WCueMenuPopup QPushButton {
 WCueMenuPopup QPushButton:hover { background-color: #343434; }
 WTrackMenu::item:selected, WTrackMenu QMenu::item:selected { background-color: #0b3f66; }
 WTrackMenu::item:disabled { color: #666666; }
+
+/* Stock-build fallback: clickable "±N" tempo range on the jog ring */
+WPushButton#JogRangeButton { background: transparent; border: none; padding: 0; color: #e03c3c; font-size: 9px; }
+WPushButton#JogRangeButton:hover { color: #ff6a5a; }
+
+#PadModeBar { qproperty-layoutSpacing: 0; }
+WPushButton#PadLayoutButton {
+  background-color: transparent; border: 0; color: #6e6e6e; font-size: 9px; font-weight: bold; text-align: right; padding: 0;
+}
+WPushButton#PadLayoutButton:hover { color: #ffffff; }

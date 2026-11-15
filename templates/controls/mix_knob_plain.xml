@@ -1,0 +1,31 @@
+<!--
+  Mixer knob with value arc. Variables: ObjectName, TooltipId, ConfigKey, ArcColor
+-->
+<Template>
+  <WidgetGroup>
+    <ObjectName>MixKnobBox</ObjectName>
+    <Size>40f,26f</Size>
+    <Children>
+      <KnobComposed>
+        <ObjectName><Variable name="ObjectName"/></ObjectName>
+        <TooltipId><Variable name="TooltipId"/></TooltipId>
+        <Pos>8,1</Pos>
+        <Size>24f,24f</Size>
+        <BackPath scalemode="STRETCH_ASPECT">skin:images/knob_bg.svg</BackPath>
+        <Knob scalemode="STRETCH_ASPECT">skin:images/knob_indicator.svg</Knob>
+        <MinAngle><Variable name="KnobMinAngle"/></MinAngle>
+        <MaxAngle><Variable name="KnobMaxAngle"/></MaxAngle>
+        <ArcRadius>10.5</ArcRadius>
+        <ArcThickness>2</ArcThickness>
+        <ArcBgThickness>2</ArcBgThickness>
+        <ArcColor><Variable name="ArcColor"/></ArcColor>
+        <ArcBgColor>#3a3a3a</ArcBgColor>
+        <ArcUnipolar>false</ArcUnipolar>
+        <ArcRoundCaps>true</ArcRoundCaps>
+        <Connection>
+          <ConfigKey><Variable name="ConfigKey"/></ConfigKey>
+        </Connection>
+      </KnobComposed>
+    </Children>
+  </WidgetGroup>
+</Template>

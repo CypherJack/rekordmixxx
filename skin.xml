@@ -21,6 +21,7 @@
       <attribute persist="true" config_key="[Skin],show_4decks">0</attribute>
       <attribute persist="true" config_key="[Skin],show_mixer">1</attribute>
       <attribute persist="true" config_key="[Rekordmixxx],show_fx">0</attribute>
+      <attribute persist="true" config_key="[Rekordmixxx],pads_wide">0</attribute>
       <attribute persist="true" config_key="[Skin],show_samplers">1</attribute>
       <attribute persist="true" config_key="[Skin],show_microphones">1</attribute>
       <attribute persist="true" config_key="[Skin],show_coverart">1</attribute>
@@ -149,7 +150,7 @@
                         <WidgetGroup>
                           <ObjectName>DeckColumn</ObjectName>
                           <Layout>vertical</Layout>
-                          <SizePolicy>me,f</SizePolicy>
+                          <SizePolicy>me,me</SizePolicy>
                           <Children>
                             <Template src="skin:templates/deck_left.xml">
                               <SetVariable name="ChanNum">1</SetVariable>
@@ -157,7 +158,7 @@
                             <WidgetGroup>
                               <ObjectName>DeckColumn</ObjectName>
                               <Layout>vertical</Layout>
-                              <SizePolicy>me,f</SizePolicy>
+                              <SizePolicy>me,me</SizePolicy>
                               <Children>
                                 <Template src="skin:templates/deck_left.xml">
                                   <SetVariable name="ChanNum">3</SetVariable>
@@ -176,7 +177,7 @@
                         <WidgetGroup>
                           <ObjectName>DeckColumn</ObjectName>
                           <Layout>vertical</Layout>
-                          <SizePolicy>me,f</SizePolicy>
+                          <SizePolicy>me,me</SizePolicy>
                           <Children>
                             <Template src="skin:templates/deck_right.xml">
                               <SetVariable name="ChanNum">2</SetVariable>
@@ -184,7 +185,7 @@
                             <WidgetGroup>
                               <ObjectName>DeckColumn</ObjectName>
                               <Layout>vertical</Layout>
-                              <SizePolicy>me,f</SizePolicy>
+                              <SizePolicy>me,me</SizePolicy>
                               <Children>
                                 <Template src="skin:templates/deck_right.xml">
                                   <SetVariable name="ChanNum">4</SetVariable>

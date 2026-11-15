@@ -1,5 +1,5 @@
 <!--
-  Track information panel: deck number, artwork, title / artist / BPM / key,
+  Track information panel: artwork, title / artist + BPM + key,
   time readout, KEY SYNC + key shift, BEAT SYNC + MASTER.  Variables: ChanNum
 -->
 <Template>
@@ -11,17 +11,11 @@
     <MinimumSize>-1,54</MinimumSize>
     <MaximumSize>-1,54</MaximumSize>
     <Children>
-      <Label>
-        <ObjectName>DeckNumber</ObjectName>
-        <Text><Variable name="ChanNum"/></Text>
-        <Alignment>center</Alignment>
-        <Size>14f,-1</Size>
-      </Label>
       <CoverArt>
         <ObjectName>DeckCover</ObjectName>
         <TooltipId>coverart</TooltipId>
         <Group><Variable name="Group"/></Group>
-        <Size>38f,38f</Size>
+        <Size>40f,40f</Size>
         <Connection>
           <ConfigKey persist="true">[Skin],show_coverart</ConfigKey>
           <BindProperty>visible</BindProperty>
@@ -30,8 +24,7 @@
       <WidgetGroup>
         <ObjectName>TitleBox</ObjectName>
         <Layout>vertical</Layout>
-        <SizePolicy>me,f</SizePolicy>
-        <MaximumSize>170,-1</MaximumSize>
+        <SizePolicy>me,min</SizePolicy>
         <Children>
           <TrackProperty>
             <ObjectName>TrackTitle</ObjectName>
@@ -39,53 +32,73 @@
             <Group><Variable name="Group"/></Group>
             <Property>title</Property>
             <Elide>right</Elide>
-            <SizePolicy>i,min</SizePolicy>
+            <SizePolicy>me,min</SizePolicy>
           </TrackProperty>
-          <TrackProperty>
-            <ObjectName>TrackArtist</ObjectName>
-            <TooltipId>track_artist</TooltipId>
-            <Group><Variable name="Group"/></Group>
-            <Property>artist</Property>
-            <Elide>right</Elide>
-            <SizePolicy>i,min</SizePolicy>
-          </TrackProperty>
+          <!-- artist, then the track's own BPM and key in the same grey -->
+          <WidgetGroup>
+            <ObjectName>ArtistRow</ObjectName>
+            <Layout>horizontal</Layout>
+            <SizePolicy>me,min</SizePolicy>
+            <Children>
+              <TrackProperty>
+                <ObjectName>TrackArtist</ObjectName>
+                <TooltipId>track_artist</TooltipId>
+                <Group><Variable name="Group"/></Group>
+                <Property>artist</Property>
+                <Elide>right</Elide>
+                <Size>150f,-1</Size>
+              </TrackProperty>
+              <TrackProperty>
+                <ObjectName>TrackBpm</ObjectName>
+                <TooltipId>visual_bpm</TooltipId>
+                <Group><Variable name="Group"/></Group>
+                <Property>bpmText</Property>
+                <SizePolicy>min,min</SizePolicy>
+              </TrackProperty>
+              <TrackProperty>
+                <ObjectName>TrackKey</ObjectName>
+                <TooltipId>track_key</TooltipId>
+                <Group><Variable name="Group"/></Group>
+                <Property>keyText</Property>
+                <SizePolicy>min,min</SizePolicy>
+              </TrackProperty>
+              <WidgetGroup><Size>0me,1min</Size></WidgetGroup>
+            </Children>
+          </WidgetGroup>
         </Children>
       </WidgetGroup>
-      <!-- BPM sits on the artist line, to the right of the title block -->
       <WidgetGroup>
-        <ObjectName>BpmBox</ObjectName>
+        <ObjectName>TimeBox</ObjectName>
         <Layout>vertical</Layout>
-        <SizePolicy>f,f</SizePolicy>
-        <MinimumSize>46,42</MinimumSize>
-        <MaximumSize>46,42</MaximumSize>
+        <SizePolicy>min,me</SizePolicy>
         <Children>
-          <WidgetGroup><Size>1min,1me</Size></WidgetGroup>
-          <NumberBpm>
-            <ObjectName>BpmReadout</ObjectName>
-            <TooltipId>visual_bpm</TooltipId>
+          <WidgetGroup>
+            <ObjectName>InfoColumn</ObjectName>
+            <Layout>vertical</Layout>
+            <SizePolicy>min,min</SizePolicy>
+            <Children>
+          <NumberPos>
+            <ObjectName>TrackTime</ObjectName>
+            <TooltipId>track_time</TooltipId>
             <Channel><Variable name="ChanNum"/></Channel>
-            <NumberOfDigits>2</NumberOfDigits>
-            <Alignment>left</Alignment>
-            <SizePolicy>min,f</SizePolicy>
+            <Alignment>right</Alignment>
+            <SizePolicy>min,min</SizePolicy>
             <Connection>
-              <ConfigKey><Variable name="Group"/>,visual_bpm</ConfigKey>
+              <ConfigKey><Variable name="Group"/>,playposition</ConfigKey>
             </Connection>
-          </NumberBpm>
+          </NumberPos>
+          <TrackProperty>
+            <ObjectName>TrackDuration</ObjectName>
+            <TooltipId>track_duration</TooltipId>
+            <Group><Variable name="Group"/></Group>
+            <Property>durationTextCentiseconds</Property>
+            <Alignment>right</Alignment>
+            <SizePolicy>min,min</SizePolicy>
+          </TrackProperty>
+            </Children>
+          </WidgetGroup>
         </Children>
       </WidgetGroup>
-
-      <WidgetGroup><Size>1me,1min</Size></WidgetGroup>
-
-      <NumberPos>
-        <ObjectName>TrackTime</ObjectName>
-        <TooltipId>track_time</TooltipId>
-        <Channel><Variable name="ChanNum"/></Channel>
-        <Alignment>right</Alignment>
-        <SizePolicy>min,min</SizePolicy>
-        <Connection>
-          <ConfigKey><Variable name="Group"/>,playposition</ConfigKey>
-        </Connection>
-      </NumberPos>
 
       <WidgetGroup>
         <ObjectName>KeySyncBlock</ObjectName>
@@ -108,7 +121,7 @@
               <Template src="skin:templates/controls/button.xml">
                 <SetVariable name="ObjectName">KeyShiftButton</SetVariable>
                 <SetVariable name="TooltipId">pitch_down</SetVariable>
-                <SetVariable name="Size">20f,20f</SetVariable>
+                <SetVariable name="Size">16f,20f</SetVariable>
                 <SetVariable name="Text">&#x2039;</SetVariable>
                 <SetVariable name="LeftPush">true</SetVariable>
                 <SetVariable name="ConfigKey"><Variable name="Group"/>,pitch_down</SetVariable>
@@ -116,9 +129,9 @@
               <Key>
                 <ObjectName>KeyReadout</ObjectName>
                 <TooltipId>visual_key</TooltipId>
-                <Channel><Variable name="ChanNum"/></Channel>
+                <Group><Variable name="Group"/></Group>
                 <Alignment>center</Alignment>
-                <Size>32f,20f</Size>
+                <Size>40f,20f</Size>
                 <Connection>
                   <ConfigKey><Variable name="Group"/>,visual_key</ConfigKey>
                 </Connection>
@@ -126,7 +139,7 @@
               <Template src="skin:templates/controls/button.xml">
                 <SetVariable name="ObjectName">KeyShiftButton</SetVariable>
                 <SetVariable name="TooltipId">pitch_up</SetVariable>
-                <SetVariable name="Size">20f,20f</SetVariable>
+                <SetVariable name="Size">16f,20f</SetVariable>
                 <SetVariable name="Text">&#x203A;</SetVariable>
                 <SetVariable name="LeftPush">true</SetVariable>
                 <SetVariable name="ConfigKey"><Variable name="Group"/>,pitch_up</SetVariable>

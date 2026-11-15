@@ -1,0 +1,77 @@
+<!--
+  Mixer channel column: trim, EQ, PFL, volume fader.  The VU meter is added
+  beside it by mixer_strip_l.xml / mixer_strip_r.xml.  Variables: ChanNum
+-->
+<Template>
+  <SetVariable name="Group">[Channel<Variable name="ChanNum"/>]</SetVariable>
+  <WidgetGroup>
+    <ObjectName>ChannelColumn</ObjectName>
+    <Layout>vertical</Layout>
+    <SizePolicy>f,me</SizePolicy>
+    <Children>
+      <Template src="skin:templates/controls/mix_knob_plain.xml">
+        <SetVariable name="ObjectName">TrimKnob</SetVariable>
+        <SetVariable name="TooltipId">pregain</SetVariable>
+        <SetVariable name="ArcColor">#d9d9d9</SetVariable>
+        <SetVariable name="ConfigKey"><Variable name="Group"/>,pregain</SetVariable>
+      </Template>
+      <Template src="skin:templates/controls/mix_knob_plain.xml">
+        <SetVariable name="ObjectName">EqKnob</SetVariable>
+        <SetVariable name="TooltipId">filterHigh</SetVariable>
+        <SetVariable name="ArcColor">#0e76f1</SetVariable>
+        <SetVariable name="ConfigKey">[EqualizerRack1_<Variable name="Group"/>_Effect1],parameter3</SetVariable>
+      </Template>
+      <Template src="skin:templates/controls/mix_knob_plain.xml">
+        <SetVariable name="ObjectName">EqKnob</SetVariable>
+        <SetVariable name="TooltipId">filterMid</SetVariable>
+        <SetVariable name="ArcColor">#0e76f1</SetVariable>
+        <SetVariable name="ConfigKey">[EqualizerRack1_<Variable name="Group"/>_Effect1],parameter2</SetVariable>
+      </Template>
+      <Template src="skin:templates/controls/mix_knob_plain.xml">
+        <SetVariable name="ObjectName">EqKnob</SetVariable>
+        <SetVariable name="TooltipId">filterLow</SetVariable>
+        <SetVariable name="ArcColor">#0e76f1</SetVariable>
+        <SetVariable name="ConfigKey">[EqualizerRack1_<Variable name="Group"/>_Effect1],parameter1</SetVariable>
+      </Template>
+      <WidgetGroup><Size>1f,4f</Size></WidgetGroup>
+      <PushButton>
+        <ObjectName>PflButton</ObjectName>
+        <TooltipId>pfl</TooltipId>
+        <Size>40f,20f</Size>
+        <NumberStates>2</NumberStates>
+        <State><Number>0</Number></State>
+        <State><Number>1</Number></State>
+        <Connection>
+          <ConfigKey><Variable name="Group"/>,pfl</ConfigKey>
+          <ButtonState>LeftButton</ButtonState>
+        </Connection>
+      </PushButton>
+      <WidgetGroup><Size>1f,8f</Size></WidgetGroup>
+      <WidgetGroup>
+        <ObjectName>FaderBox</ObjectName>
+        <Layout>horizontal</Layout>
+        <SizePolicy>me,me</SizePolicy>
+        <Children>
+          <SliderComposed>
+            <ObjectName>VolumeFader</ObjectName>
+            <TooltipId>channel_volume</TooltipId>
+            <Size>26f,56me</Size>
+            <Slider scalemode="STRETCH">skin:images/volume_track_v.svg</Slider>
+            <Handle scalemode="STRETCH_ASPECT">skin:images/volume_handle_v.svg</Handle>
+            <Horizontal>false</Horizontal>
+            <BarWidth>2</BarWidth>
+            <BarAxisPos>13</BarAxisPos>
+            <BarMargins>2,2</BarMargins>
+            <BarColor>#0e76f1</BarColor>
+            <BarBgColor>#00000000</BarBgColor>
+            <BarUnipolar>true</BarUnipolar>
+            <BarRoundCaps>false</BarRoundCaps>
+            <Connection>
+              <ConfigKey><Variable name="Group"/>,volume</ConfigKey>
+            </Connection>
+          </SliderComposed>
+        </Children>
+      </WidgetGroup>
+    </Children>
+  </WidgetGroup>
+</Template>

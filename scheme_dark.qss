@@ -10,7 +10,7 @@ WPushButton#KeySyncButton[displayValue="1"], WPushButton#BeatSyncButton[displayV
 WPushButton#AutoLoopButton[displayValue="1"], WPushButton#ManualLoopButton[displayValue="1"],
 WPushButton#SlipButton[displayValue="1"], WPushButton#QuantizeButton[displayValue="1"],
 WPushButton#MasterTempoButton[displayValue="1"], WPushButton#ReverseButton[displayValue="1"],
-WPushButton#PflButton[displayValue="1"], WPushButton#TalkoverButton[displayValue="1"],
+WPushButton#TalkoverButton[displayValue="1"],
 WPushButton#PadButton[displayValue="1"], WPushButton#PadButton[pressed="true"],
 WPushButton#FooterButton[pressed="true"] {
   background-color: #0e76f1;
