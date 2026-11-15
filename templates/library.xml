@@ -58,6 +58,15 @@
             <Children>
               <Library>
                 <ShowButtonText>true</ShowButtonText>
+                <!-- Overview column: same white / blue / orange as the deck waveforms -->
+                <BgColor><Variable name="OverviewBg"/></BgColor>
+                <SignalColor><Variable name="SignalColor"/></SignalColor>
+                <SignalHighColor><Variable name="WaveHigh"/></SignalHighColor>
+                <SignalMidColor><Variable name="WaveMid"/></SignalMidColor>
+                <SignalLowColor><Variable name="WaveLow"/></SignalLowColor>
+                <SignalRGBHighColor><Variable name="WaveHigh"/></SignalRGBHighColor>
+                <SignalRGBMidColor><Variable name="WaveMid"/></SignalRGBMidColor>
+                <SignalRGBLowColor><Variable name="WaveLow"/></SignalRGBLowColor>
               </Library>
             </Children>
           </WidgetGroup>

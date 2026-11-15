@@ -23,20 +23,20 @@
         <PlayPosColor><Variable name="PlayPosColor"/></PlayPosColor>
         <PlayedOverlayColor><Variable name="PlayedOverlayColor"/></PlayedOverlayColor>
         <EndOfTrackColor><Variable name="EndOfTrackColor"/></EndOfTrackColor>
-        <LabelFontSize>9</LabelFontSize>
+        <LabelFontSize>11</LabelFontSize>
         <LabelTextColor>#bdbdbd</LabelTextColor>
         <DefaultMark>
-          <Align>bottom|right</Align>
+          <Align>top|right</Align>
           <Color>#FF0000</Color>
           <TextColor>#000000</TextColor>
           <Text> %1 </Text>
         </DefaultMark>
         <Mark>
           <Control>cue_point</Control>
-          <Text>C</Text>
-          <Align>bottom|right</Align>
-          <Color><Variable name="CueColor"/></Color>
-          <TextColor>#000000</TextColor>
+          <Text>&#x25BC;</Text>
+          <Align>top|hcenter</Align>
+          <Color>#E01E1E</Color>
+          <TextColor>#E01E1E</TextColor>
         </Mark>
         <MarkRange>
           <StartControl>loop_start_position</StartControl>

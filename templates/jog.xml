@@ -1,6 +1,8 @@
 <!--
-  Jog dial: white ring + blue ring around the BPM readout, red position marker (rotates with
-  the record, click-drag to scratch), +/- pitch bend. Layout-less group: children use <Pos>.
+  Jog dial: white ring + blue ring around the BPM readout. Like rekordbox, the ring is a
+  round tempo fader: drag to change tempo, right click to reset; the red arc shows the offset.
+  The +-N label below cycles the tempo range.
+  Layout-less group: children use <Pos>.
   Variables: ChanNum
 -->
 <Template>
@@ -8,25 +10,16 @@
   <WidgetGroup>
     <ObjectName>JogDial</ObjectName>
     <Size>112f,112f</Size>
-    <!-- The ring is a static background so it also shows where the OpenGL Spinny cannot draw -->
     <BackPath scalemode="STRETCH_ASPECT">skin:images/jog_bg.svg</BackPath>
     <Children>
-      <Spinny>
-        <TooltipId>spinny</TooltipId>
-        <Pos>0,0</Pos>
-        <Size>112f,112f</Size>
-        <Group><Variable name="Group"/></Group>
-        <PathBackground scalemode="STRETCH">skin:images/jog_bg.svg</PathBackground>
-        <PathForeground scalemode="STRETCH">skin:images/jog_marker.svg</PathForeground>
-        <ShowCover>false</ShowCover>
-      </Spinny>
+      <!-- BPM / tempo readout drawn on the static ring -->
       <NumberBpm>
         <ObjectName>JogBpm</ObjectName>
         <TooltipId>visual_bpm</TooltipId>
-        <Pos>21,33</Pos>
-        <Size>70f,24f</Size>
+        <Pos>21,38</Pos>
+        <Size>70f,22f</Size>
         <Channel><Variable name="ChanNum"/></Channel>
-        <NumberOfDigits>2</NumberOfDigits>
+        <NumberOfDigits>1</NumberOfDigits>
         <Alignment>center</Alignment>
         <Connection>
           <ConfigKey><Variable name="Group"/>,visual_bpm</ConfigKey>
@@ -35,42 +28,97 @@
       <NumberRate>
         <ObjectName>JogRate</ObjectName>
         <TooltipId>rate_display</TooltipId>
-        <Pos>21,57</Pos>
+        <Pos>21,60</Pos>
         <Size>70f,14f</Size>
         <Channel><Variable name="ChanNum"/></Channel>
         <NumberOfDigits>1</NumberOfDigits>
         <Alignment>center</Alignment>
       </NumberRate>
-      <PushButton>
-        <ObjectName>BendDownButton</ObjectName>
-        <TooltipId>rate_temp_down_rate_temp_down_small</TooltipId>
-        <Pos>36,75</Pos>
-        <Size>18f,14f</Size>
-        <NumberStates>2</NumberStates>
-        <LeftClickIsPushButton>true</LeftClickIsPushButton>
-        <State><Number>0</Number><Text>&#x2212;</Text></State>
-        <State><Number>1</Number><Text>&#x2212;</Text></State>
-        <Connection>
-          <ConfigKey><Variable name="Group"/>,rate_temp_down</ConfigKey>
-          <ButtonState>LeftButton</ButtonState>
-          <EmitOnPressAndRelease>true</EmitOnPressAndRelease>
-        </Connection>
-      </PushButton>
-      <PushButton>
-        <ObjectName>BendUpButton</ObjectName>
-        <TooltipId>rate_temp_up_rate_temp_up_small</TooltipId>
-        <Pos>58,75</Pos>
-        <Size>18f,14f</Size>
-        <NumberStates>2</NumberStates>
-        <LeftClickIsPushButton>true</LeftClickIsPushButton>
-        <State><Number>0</Number><Text>+</Text></State>
-        <State><Number>1</Number><Text>+</Text></State>
-        <Connection>
-          <ConfigKey><Variable name="Group"/>,rate_temp_up</ConfigKey>
-          <ButtonState>LeftButton</ButtonState>
-          <EmitOnPressAndRelease>true</EmitOnPressAndRelease>
-        </Connection>
-      </PushButton>
+      <!-- The ring is a round tempo fader. Drag to change tempo,
+           right-click to reset; the arc on the blue ring shows the offset. -->
+      <WidgetGroup>
+        <ObjectName>JogTempoRing</ObjectName>
+        <Pos>0,0</Pos>
+        <Size>112f,112f</Size>
+        <Children>
+          <KnobComposed>
+            <ObjectName>JogTempoKnob</ObjectName>
+            <TooltipId>rate</TooltipId>
+            <Pos>0,0</Pos>
+            <Size>112f,112f</Size>
+            <MinAngle>-150</MinAngle>
+            <MaxAngle>150</MaxAngle>
+            <ArcRadius>41</ArcRadius>
+            <ArcThickness>3</ArcThickness>
+            <ArcColor>#e03c3c</ArcColor>
+            <ArcUnipolar>false</ArcUnipolar>
+            <ArcRoundCaps>true</ArcRoundCaps>
+            <!-- clockwise = faster (with the default rate_dir, positive rate is slower):
+                 mirror the 0..1 parameter as 1 - p -->
+            <Connection>
+              <ConfigKey><Variable name="Group"/>,rate</ConfigKey>
+              <Transform><Invert/><Add>1</Add></Transform>
+            </Connection>
+          </KnobComposed>
+          <!-- cycles 6, 8, 10, 16, 24, 50 %; a second button per 6/10/24 matches the value a
+               CPU without fused multiply-add lands on when writing that parameter -->
+          <Template src="skin:templates/controls/tempo_range_button.xml">
+            <SetVariable name="Value">0.007518796992481203</SetVariable>
+            <SetVariable name="Next">0.012531328320802004</SetVariable>
+            <SetVariable name="Text">&#xB1;4</SetVariable>
+          </Template>
+          <Template src="skin:templates/controls/tempo_range_button.xml">
+            <SetVariable name="Value">0.012531328320802003</SetVariable>
+            <SetVariable name="Next">0.017543859649122806</SetVariable>
+            <SetVariable name="Text">&#xB1;6</SetVariable>
+          </Template>
+          <Template src="skin:templates/controls/tempo_range_button.xml">
+            <SetVariable name="Value">0.012531328320802004</SetVariable>
+            <SetVariable name="Next">0.017543859649122806</SetVariable>
+            <SetVariable name="Text">&#xB1;6</SetVariable>
+          </Template>
+          <Template src="skin:templates/controls/tempo_range_button.xml">
+            <SetVariable name="Value">0.017543859649122806</SetVariable>
+            <SetVariable name="Next">0.022556390977443608</SetVariable>
+            <SetVariable name="Text">&#xB1;8</SetVariable>
+          </Template>
+          <Template src="skin:templates/controls/tempo_range_button.xml">
+            <SetVariable name="Value">0.02255639097744361</SetVariable>
+            <SetVariable name="Next">0.03759398496240601</SetVariable>
+            <SetVariable name="Text">&#xB1;10</SetVariable>
+          </Template>
+          <Template src="skin:templates/controls/tempo_range_button.xml">
+            <SetVariable name="Value">0.022556390977443608</SetVariable>
+            <SetVariable name="Next">0.03759398496240601</SetVariable>
+            <SetVariable name="Text">&#xB1;10</SetVariable>
+          </Template>
+          <Template src="skin:templates/controls/tempo_range_button.xml">
+            <SetVariable name="Value">0.03759398496240601</SetVariable>
+            <SetVariable name="Next">0.05764411027568922</SetVariable>
+            <SetVariable name="Text">&#xB1;16</SetVariable>
+          </Template>
+          <Template src="skin:templates/controls/tempo_range_button.xml">
+            <SetVariable name="Value">0.05764411027568921</SetVariable>
+            <SetVariable name="Next">0.12280701754385964</SetVariable>
+            <SetVariable name="Text">&#xB1;24</SetVariable>
+          </Template>
+          <Template src="skin:templates/controls/tempo_range_button.xml">
+            <SetVariable name="Value">0.05764411027568922</SetVariable>
+            <SetVariable name="Next">0.12280701754385964</SetVariable>
+            <SetVariable name="Text">&#xB1;24</SetVariable>
+          </Template>
+          <Template src="skin:templates/controls/tempo_range_button.xml">
+            <SetVariable name="Value">0.12280701754385964</SetVariable>
+            <SetVariable name="Next">0.012531328320802004</SetVariable>
+            <SetVariable name="Text">&#xB1;50</SetVariable>
+          </Template>
+          <Template src="skin:templates/controls/tempo_range_button.xml">
+            <SetVariable name="Value">0.22305764411027568</SetVariable>
+            <SetVariable name="Next">0.012531328320802004</SetVariable>
+            <SetVariable name="Text">&#xB1;90</SetVariable>
+          </Template>
+        </Children>
+      </WidgetGroup>
     </Children>
   </WidgetGroup>
 </Template>

@@ -1,0 +1,16 @@
+<!-- Mixer channel with its full-height VU meter on the right (towards the centre). Variables: ChanNum -->
+<Template>
+  <WidgetGroup>
+    <ObjectName>ChannelStrip</ObjectName>
+    <Layout>horizontal</Layout>
+    <SizePolicy>f,me</SizePolicy>
+    <Children>
+      <Template src="skin:templates/mixer_channel.xml"/>
+      <Template src="skin:templates/controls/vumeter.xml">
+        <SetVariable name="Group">[Channel<Variable name="ChanNum"/>]</SetVariable>
+        <SetVariable name="TooltipId">channel_VuMeter</SetVariable>
+        <SetVariable name="Suffix"></SetVariable>
+      </Template>
+    </Children>
+  </WidgetGroup>
+</Template>

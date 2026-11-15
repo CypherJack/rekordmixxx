@@ -1,0 +1,32 @@
+<!--
+  One state of the clickable "±N" tempo range label on the jog ring (stock-build fallback).
+  Visible only while rateRange == Value; a click sets rateRange to Next.
+  Value / Next are rateRange *parameters* (normalized over its 0.01..4.00 range), since
+  widget connections compare and write parameters, e.g. 8% = (0.08 - 0.01) / 3.99. They
+  are the exact doubles Mixxx computes, so IsEqual matches and writes round-trip.
+  Variables: Group, Value, Next, Text
+-->
+<Template>
+  <PushButton>
+    <ObjectName>JogRangeButton</ObjectName>
+    <TooltipId>rate_range_display</TooltipId>
+    <Pos>36,76</Pos>
+    <Size>40f,14f</Size>
+    <NumberStates>1</NumberStates>
+    <State><Number>0</Number><Text><Variable name="Text"/></Text></State>
+    <Connection>
+      <ConfigKey><Variable name="Group"/>,rateRange</ConfigKey>
+      <BindProperty>visible</BindProperty>
+      <Transform><IsEqual><Variable name="Value"/></IsEqual></Transform>
+    </Connection>
+    <!-- IsEqual's inverse writes exactly Next on click -->
+    <Connection>
+      <ConfigKey><Variable name="Group"/>,rateRange</ConfigKey>
+      <ButtonState>LeftButton</ButtonState>
+      <!-- press only: a 1-state button would otherwise also send 0 on release -->
+      <EmitOnDownPress>true</EmitOnDownPress>
+      <ConnectValueToWidget>false</ConnectValueToWidget>
+      <Transform><IsEqual><Variable name="Next"/></IsEqual></Transform>
+    </Connection>
+  </PushButton>
+</Template>

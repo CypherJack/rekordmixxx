@@ -1,17 +1,39 @@
-<!-- Pad mode selector under the pads: left click = next mode, right click = previous. Variables: ChanNum, Mode -->
+<!--
+  Bar under the pads: mode selector (left click = next mode, right click = previous) and the
+  pad layout toggle (2 or 4 columns, [Rekordmixxx],pads_wide). Variables: ChanNum, Mode
+-->
 <Template>
-  <PushButton>
-    <ObjectName>PadModeButton</ObjectName>
-    <Size>1me,16f</Size>
-    <NumberStates>1</NumberStates>
-    <State><Number>0</Number><Text><Variable name="Mode"/>  &#x25BE;</Text><Alignment>left</Alignment></State>
-    <Connection>
-      <ConfigKey>[Rekordmixxx],padmode_next_<Variable name="ChanNum"/></ConfigKey>
-      <ButtonState>LeftButton</ButtonState>
-    </Connection>
-    <Connection>
-      <ConfigKey>[Rekordmixxx],padmode_prev_<Variable name="ChanNum"/></ConfigKey>
-      <ButtonState>RightButton</ButtonState>
-    </Connection>
-  </PushButton>
+  <WidgetGroup>
+    <ObjectName>PadModeBar</ObjectName>
+    <Layout>horizontal</Layout>
+    <SizePolicy>me,f</SizePolicy>
+    <Children>
+      <PushButton>
+        <ObjectName>PadModeButton</ObjectName>
+        <Size>1me,16f</Size>
+        <NumberStates>1</NumberStates>
+        <State><Number>0</Number><Text><Variable name="Mode"/>  &#x25BE;</Text><Alignment>left</Alignment></State>
+        <Connection>
+          <ConfigKey>[Rekordmixxx],padmode_next_<Variable name="ChanNum"/></ConfigKey>
+          <ButtonState>LeftButton</ButtonState>
+        </Connection>
+        <Connection>
+          <ConfigKey>[Rekordmixxx],padmode_prev_<Variable name="ChanNum"/></ConfigKey>
+          <ButtonState>RightButton</ButtonState>
+        </Connection>
+      </PushButton>
+      <PushButton>
+        <ObjectName>PadLayoutButton</ObjectName>
+        <Tooltip>Pad layout: 2 or 4 columns</Tooltip>
+        <Size>40f,16f</Size>
+        <NumberStates>2</NumberStates>
+        <State><Number>0</Number><Text>2 COL</Text><Alignment>right</Alignment></State>
+        <State><Number>1</Number><Text>4 COL</Text><Alignment>right</Alignment></State>
+        <Connection>
+          <ConfigKey persist="true">[Rekordmixxx],pads_wide</ConfigKey>
+          <ButtonState>LeftButton</ButtonState>
+        </Connection>
+      </PushButton>
+    </Children>
+  </WidgetGroup>
 </Template>

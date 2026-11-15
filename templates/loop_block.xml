@@ -4,20 +4,20 @@
   <WidgetGroup>
     <ObjectName>LoopBlock</ObjectName>
     <Layout>vertical</Layout>
-    <SizePolicy>f,f</SizePolicy>
+    <SizePolicy>f,me</SizePolicy>
     <MinimumSize>60,-1</MinimumSize>
     <MaximumSize>60,-1</MaximumSize>
     <Children>
       <BeatSpinBox>
         <ObjectName>LoopSize</ObjectName>
         <TooltipId>beatloop_size</TooltipId>
-        <Size>60f,32f</Size>
+        <Size>60f,32me</Size>
         <Value><Variable name="Group"/>,beatloop_size</Value>
       </BeatSpinBox>
       <WidgetGroup>
         <ObjectName>LoopRow</ObjectName>
         <Layout>horizontal</Layout>
-        <SizePolicy>f,f</SizePolicy>
+        <SizePolicy>f,me</SizePolicy>
         <Children>
           <Template src="skin:templates/controls/button.xml">
             <SetVariable name="ObjectName">LoopHalveButton</SetVariable>
@@ -40,12 +40,12 @@
       <WidgetGroup>
         <ObjectName>LoopRow</ObjectName>
         <Layout>horizontal</Layout>
-        <SizePolicy>f,f</SizePolicy>
+        <SizePolicy>f,me</SizePolicy>
         <Children>
           <PushButton>
             <ObjectName>AutoLoopButton</ObjectName>
             <TooltipId>beatloop_activate</TooltipId>
-            <Size>29f,24f</Size>
+            <Size>29f,24me</Size>
             <NumberStates>2</NumberStates>
             <LeftClickIsPushButton>true</LeftClickIsPushButton>
             <State><Number>0</Number><Text>AU</Text></State>
@@ -63,7 +63,7 @@
           <PushButton>
             <ObjectName>ManualLoopButton</ObjectName>
             <TooltipId>reloop_toggle</TooltipId>
-            <Size>29f,24f</Size>
+            <Size>29f,24me</Size>
             <NumberStates>2</NumberStates>
             <LeftClickIsPushButton>true</LeftClickIsPushButton>
             <State><Number>0</Number><Text>MA</Text></State>
@@ -77,6 +77,8 @@
           </PushButton>
         </Children>
       </WidgetGroup>
+      <!-- matches the pad-mode selector under the pads -->
+      <WidgetGroup><Size>1min,19f</Size></WidgetGroup>
     </Children>
   </WidgetGroup>
 </Template>

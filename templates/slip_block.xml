@@ -4,14 +4,14 @@
   <WidgetGroup>
     <ObjectName>SlipBlock</ObjectName>
     <Layout>vertical</Layout>
-    <SizePolicy>f,f</SizePolicy>
-    <MinimumSize>40,112</MinimumSize>
-    <MaximumSize>40,112</MaximumSize>
+    <SizePolicy>f,me</SizePolicy>
+    <MinimumSize>44,-1</MinimumSize>
+    <MaximumSize>44,-1</MaximumSize>
     <Children>
       <Template src="skin:templates/controls/button.xml">
         <SetVariable name="ObjectName">SlipButton</SetVariable>
         <SetVariable name="TooltipId">slip_mode</SetVariable>
-        <SetVariable name="Size">40f,24f</SetVariable>
+        <SetVariable name="Size">44f,24f</SetVariable>
         <SetVariable name="Text">SLIP</SetVariable>
         <SetVariable name="LeftPush">false</SetVariable>
         <SetVariable name="ConfigKey"><Variable name="Group"/>,slip_enabled</SetVariable>
@@ -20,7 +20,7 @@
       <Template src="skin:templates/controls/button.xml">
         <SetVariable name="ObjectName">QuantizeButton</SetVariable>
         <SetVariable name="TooltipId">quantize</SetVariable>
-        <SetVariable name="Size">40f,24f</SetVariable>
+        <SetVariable name="Size">44f,24f</SetVariable>
         <SetVariable name="Text">Q</SetVariable>
         <SetVariable name="LeftPush">false</SetVariable>
         <SetVariable name="ConfigKey"><Variable name="Group"/>,quantize</SetVariable>
@@ -29,11 +29,12 @@
       <Template src="skin:templates/controls/button.xml">
         <SetVariable name="ObjectName">MasterTempoButton</SetVariable>
         <SetVariable name="TooltipId">keylock</SetVariable>
-        <SetVariable name="Size">40f,24f</SetVariable>
+        <SetVariable name="Size">44f,24f</SetVariable>
         <SetVariable name="Text">MT</SetVariable>
         <SetVariable name="LeftPush">false</SetVariable>
         <SetVariable name="ConfigKey"><Variable name="Group"/>,keylock</SetVariable>
       </Template>
+      <WidgetGroup><Size>1min,19f</Size></WidgetGroup>
     </Children>
   </WidgetGroup>
 </Template>
