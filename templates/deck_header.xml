@@ -50,7 +50,7 @@
               </TrackProperty>
               <TrackProperty>
                 <ObjectName>TrackBpm</ObjectName>
-                <TooltipId>bpm</TooltipId>
+                <TooltipId>visual_bpm</TooltipId>
                 <Group><Variable name="Group"/></Group>
                 <Property>bpmText</Property>
                 <SizePolicy>min,min</SizePolicy>
